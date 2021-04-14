@@ -3,14 +3,14 @@
 #include <PubSubClient.h>
 
 
-#define SSID "***REMOVED***"
-#define WIFI_PASSWORD "***REMOVED***"
+#define SSID "SSID"
+#define WIFI_PASSWORD "PASSWORD"
 WiFiClient client;
 
 #define MQTT_PORT 1883
-#define MQTT_SERVER "***REMOVED***"
-#define MQTT_USER "64uPWmd"
-#define MQTT_PASSWORD "RWxh5x9UU2P4X"
+#define MQTT_SERVER "SERVER URL"
+#define MQTT_USER "MQTT Username"
+#define MQTT_PASSWORD "MQTT Password"
 #define TOPIC_ROOT "plant_water"
 #define TOPIC_BUTTON "plant_water/button"
 #define TOPIC_FLOAT "plant_water/float"

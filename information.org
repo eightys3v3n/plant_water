@@ -1,0 +1,164 @@
+* Instructions
+** Hardware
+*** To Purchase
+**** Project Box
+**** Control Board with WiFi
+**** Relay
+**** Button
+**** Float Sensor
+**** Wire
+**** Parastolic Pump
+     A small parastolic pump.
+     5 Watts is what I purchased.
+     
+**** Silicone Tube
+     Sized that it can be connected to the parastolic pump. If the pump says it works with 6mm OD, 4mm ID then buy that.
+     More than a meter worth but depends on the reseviour and plants you intend to water.
+     
+**** Power Supply
+     >= 5 watts.
+     Nice to have a switch on it.
+     The end cut off so its just two wires; mark the positive and negative with a volt meter if it isn't marked.
+     
+**** 5 Volt Regulator
+     Can take the output of your power supply as input to create 5V.
+
+**** Buck Converter
+     Takes some random input voltage and turns it into a specified output voltage.
+     This is only required if your pump takes a different voltage than your power supply gives.
+     
+*** Assembly
+    If a pin is specified without telling you what its on, its on the ESP8266 WiFi board.
+    All the pins on the ESP8266 board we will be dealing with are on the same side, the ones labeled D1, D2...
+    
+**** Power Supply
+     Make two connections come off of both wires (4 total, two negative/black and two positive/red).
+     Connect one pair of positive/red and negative/black to the correct inputs of the 5V regulator.
+     
+**** ESP8266 WiFi Controller
+     Connect the positive/red output from the 5V regulator to one of the 3V3 pins.
+     Connect the negative/black output from the 5V regulator to one of the GND pins.
+    
+**** Float Sensor Terminal Block
+     Connect one side to the GND pin and label it negative/black.
+     The other side goes to D6 and label it positive/red.
+
+**** Button
+     Connect one side to the GND rail.
+     The other side goes to D5.
+     
+**** Relay
+     We will label the relay pins as such:
+     +------+
+     |*    *|
+     |      |
+     |      |
+     |      |
+     |*    *|
+     |*    *|
+     +------+
+     - top left as R1
+     - top right as R2
+     - middle left as R3
+     - middle right as R4
+     - bottom left as R5
+     - bottom right as R6
+     One of R3 or R4 goes to D7, the other goes to GND.
+
+     
+** Software
+*** Problems and Solutions
+**** Flashing while watching serial debug
+     If having problems, use a USB serial adapter connected via the RX and TX pins on the ESP8266.
+     This allows reading of the serial port while flashing new firmwares without blocked file errors.
+
+**** Random Crashing and restarting
+     Use `esptool.py --port /dev/ttyUSB0 erase_flash`.
+     It seems that when developing and flashing, sometimes it leaves code in the flash that breaks stuff.
+     
+  
+*** Building ESPurna
+   Clone ESPurna
+**** Edit code/platformio_override.ini
+     4m is the megabytes of memory on the selected ESP8266 device.
+     eightys3v3n is the username you will use to login.
+     password is the password you will use to login.
+#+BEGIN_SRC
+[env:plant_water]
+extends = env:esp8266-4m-latest-base
+src_build_flags = -DWEB_USERNAME=\"admin\" -DADMIN_PASS=\"password\" -DUSE_CUSTOM_H
+#+END_SRC
+
+**** Edit code/espurna/config/custom.h
+     NODEMCU_LOLIN is the ESP8266 device we are using.
+     We need to convert the D0, D1 labels into their GPIO numbers, see https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/.
+     RELAY1_PIN 13 means we connect the relay switch to pin D7.
+     BUTTON2_PIN 14 means we connect the button to D5.
+     DIGITAL1_PIN 12 means we connect the float sensor to D6.
+     The other configuration options have details at https://github.com/xoseperez/espurna/wiki.
+#+BEGIN_SRC
+#define MANUFACTURER        "NODEMCU"
+#define DEVICE              "LOLIN"
+
+#define TELNET_SUPPORT 0
+#define MQTT_SUPPORT 1
+#define WEB_SUPPORT 1
+#define DIGITAL_SUPPORT 1
+#define TERMINAL_MQTT_SUPPORT 1
+#define TERMINAL_WEB_API_SUPPORT 1
+
+#define BUTTON_MQTT_SEND_ALL_EVENTS
+#define BUTTON_MQTT_RETAI
+   
+#define RELAY1_PIN 13
+#define BUTTON2_PIN 14
+#define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_LOW
+#define BUTTON2_RELAY 1
+#define DIGITAL1_PIN 12
+#+END_SRC
+
+**** Compile firmware
+     Plug in the ESP8266 board via USB.
+     Run `pio run -t upload -e plant_water`
+     This both compiles the program and flashes it to the ESP8266.
+     
+
+* Unknown
+** ESP8266 Node Pins:
+  - D4/GPIO2 :: built-in LED
+  - D5/GPIO14 :: extra button
+  - D6/GPIO12 :: float sensor
+  - D7/GPIO13 :: relay
+
+** ESPurna Building
+  env ESPURNA_FLAGS='-DNODEMCU_LOLIN' PLATFORMIO_SRC_BUILD_FLAGS='
+
+  -DNODEMCU_LOLIN
+  -DTELNET_SUPPORT=0
+  -DMQTT_SUPPORT=1
+  -DWEB_SUPPORT=1
+  -DWEB_SSL_ENABLED=1
+  #define DIGITAL_SUPPORT 1
+  #define TERMINAL_MQTT_SUPPORT 1
+  #define TERMINAL_WEB_API_SUPPORT 1
+
+  #define BUTTON_MQTT_SEND_ALL_EVENTS
+  #define BUTTON_MQTT_RETAIN
+
+  -DWEB_USERNAME=eightys3v3n
+  -DADMIN_PASS=w99WhvS8sWqXVT
+
+  // LED preconfigured
+
+  // BUTTON1 already configured to flash button
+
+  #define RELAY1_PIN 13
+  
+  #define BUTTON2_PIN 13
+  #define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_LOW
+  #define BUTTON2_RELAY 1
+
+  #define DIGITAL1_PIN 14
+
+
+  ' pio run -e esp8266-4m-base
