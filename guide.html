@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-20 Tue 14:00 -->
+<!-- 2021-04-20 Tue 14:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -221,23 +221,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org90b6c9c">1. Instructions</a>
+<li><a href="#org78d5c95">1. Instructions</a>
 <ul>
-<li><a href="#org62e7e77">1.1. Requirements</a></li>
-<li><a href="#org868c60e">1.2. Hardware</a>
+<li><a href="#org9d3dfd5">1.1. Requirements</a></li>
+<li><a href="#org682d8ec">1.2. Hardware</a>
 <ul>
-<li><a href="#org368a6cf">1.2.1. Materials</a></li>
-<li><a href="#org46991d9">1.2.2. Assembly</a></li>
+<li><a href="#org6177b2c">1.2.1. Materials</a></li>
+<li><a href="#orge6352f9">1.2.2. Assembly</a></li>
 </ul>
 </li>
-<li><a href="#orga73bdfb">1.3. Software</a>
+<li><a href="#org1e6fb3d">1.3. Software</a>
 <ul>
-<li><a href="#org27efeb9">1.3.1. Clone Repos</a></li>
-<li><a href="#org6271fad">1.3.2. Building ESPurna</a></li>
-<li><a href="#org191050b">1.3.3. Configure ESPurna</a></li>
-<li><a href="#orge2a5334">1.3.4. Install HomeAssistant</a></li>
-<li><a href="#orgdc51cfe">1.3.5. Configure HomeAssistant</a></li>
-<li><a href="#org97281e9">1.3.6. Problems and Solutions</a></li>
+<li><a href="#orge37ada5">1.3.1. Clone Repos</a></li>
+<li><a href="#org6a79c45">1.3.2. Building ESPurna</a></li>
+<li><a href="#orgdeda394">1.3.3. Configure ESPurna</a></li>
+<li><a href="#org378ec8e">1.3.4. Install HomeAssistant</a></li>
+<li><a href="#org3de1ad8">1.3.5. Configure HomeAssistant</a></li>
+<li><a href="#org589f1f4">1.3.6. Problems and Solutions</a></li>
 </ul>
 </li>
 </ul>
@@ -245,12 +245,18 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org90b6c9c" class="outline-2">
-<h2 id="org90b6c9c"><span class="section-number-2">1</span> Instructions</h2>
+<div id="outline-container-org78d5c95" class="outline-2">
+<h2 id="org78d5c95"><span class="section-number-2">1</span> Instructions</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+This project results in a plant watering robot connected to the internet of things.
+It costs as low as $40 if you scavenge components or as much as $150 if you purchase everything new from Amazon.
+</p>
 </div>
-<div id="outline-container-org62e7e77" class="outline-3">
-<h3 id="org62e7e77"><span class="section-number-3">1.1</span> Requirements</h3>
+
+
+<div id="outline-container-org9d3dfd5" class="outline-3">
+<h3 id="org9d3dfd5"><span class="section-number-3">1.1</span> Requirements</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Running Linux or you must use the Arduino-IDE to compile and flash the code.
@@ -260,23 +266,33 @@ Have pio, esptool, gcc installed.
 </div>
 </div>
 
-<div id="outline-container-org868c60e" class="outline-3">
-<h3 id="org868c60e"><span class="section-number-3">1.2</span> Hardware</h3>
+<div id="outline-container-org682d8ec" class="outline-3">
+<h3 id="org682d8ec"><span class="section-number-3">1.2</span> Hardware</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org368a6cf" class="outline-4">
-<h4 id="org368a6cf"><span class="section-number-4">1.2.1</span> Materials</h4>
+<div id="outline-container-org6177b2c" class="outline-4">
+<h4 id="org6177b2c"><span class="section-number-4">1.2.1</span> Materials</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
-See spreadsheet for Amazon links and prices.
-Estimated cost to make one is between $70 and $150 at the time of making this guide, depending on what you have already.
+Estimated cost to make one is between $70 and $150 at the time of making this guide,
+depending on what you have already. See the Excel or Google sheet for more info on specific parts.
 <a href="https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing</a>
 </p>
 </div>
 
 <ol class="org-ol">
-<li><a id="org5a61f5a"></a>Project Box<br />
+<li><a id="orgb50713a"></a>Water Container<br />
 <div class="outline-text-5" id="text-1-2-1-1">
+<p>
+Some kind of container you can put the float sensor and a tube into. The robot will pull water from there to water
+plants with the other tube.
+I used a 4L jug of water.
+</p>
+</div>
+</li>
+
+<li><a id="orgac51f13"></a>Project Box<br />
+<div class="outline-text-5" id="text-1-2-1-2">
 <p>
 Something sorta water resistant (don't want to spill water on it and wreck it) to put your electronics and pump into.
 You also have to be able to get the hoses out and power into the box.
@@ -288,8 +304,8 @@ and one for the electronics in case of leaks.
 </div>
 </li>
 
-<li><a id="orgf66975a"></a>Control Board with WiFi<br />
-<div class="outline-text-5" id="text-1-2-1-2">
+<li><a id="orge2553e2"></a>Control Board with WiFi<br />
+<div class="outline-text-5" id="text-1-2-1-3">
 <p>
 An ESP8266 device, I used the NodeMCU-12E board available on Amazon and elsewhere.
 This board should be capable of running at 5V to switch a 5V relay. The NodeMCU-12E
@@ -298,8 +314,8 @@ is rated for 3.3V but can usually run at 5V without issue.
 </div>
 </li>
 
-<li><a id="org1347908"></a>Relay<br />
-<div class="outline-text-5" id="text-1-2-1-3">
+<li><a id="orgd8faad5"></a>Relay<br />
+<div class="outline-text-5" id="text-1-2-1-4">
 <p>
 A 5V relay that can switch 8-12 volts DC.
 You connect the motor power through this, and the ESP8266 can tell it to turn the motor on and off.
@@ -307,32 +323,32 @@ You connect the motor power through this, and the ESP8266 can tell it to turn th
 </div>
 </li>
 
-<li><a id="org711c9c9"></a>Button (optional)<br />
-<div class="outline-text-5" id="text-1-2-1-4">
+<li><a id="org93977cb"></a>Button (optional)<br />
+<div class="outline-text-5" id="text-1-2-1-5">
 <p>
 Just a push button from an arduino kit.
 </p>
 </div>
 </li>
 
-<li><a id="org879227b"></a>Float Sensor<br />
-<div class="outline-text-5" id="text-1-2-1-5">
+<li><a id="orge5cf1ea"></a>Float Sensor<br />
+<div class="outline-text-5" id="text-1-2-1-6">
 <p>
 Something to tell you when the water level is low so your plant doesn't die.
 </p>
 </div>
 </li>
 
-<li><a id="org872f5c9"></a>Wire<br />
-<div class="outline-text-5" id="text-1-2-1-6">
+<li><a id="org6e49c13"></a>Wire<br />
+<div class="outline-text-5" id="text-1-2-1-7">
 <p>
 Just some extra wire to conenct things with.
 </p>
 </div>
 </li>
 
-<li><a id="orgb169562"></a>Parastolic Pump<br />
-<div class="outline-text-5" id="text-1-2-1-7">
+<li><a id="org1f054dc"></a>Parastolic Pump<br />
+<div class="outline-text-5" id="text-1-2-1-8">
 <p>
 A small parastolic pump.
 5 Watts is what I purchased.
@@ -341,8 +357,8 @@ It should run at a decent speed when powered by whatever power supply you select
 </div>
 </li>
 
-<li><a id="org33b6c6f"></a>Silicone Tube<br />
-<div class="outline-text-5" id="text-1-2-1-8">
+<li><a id="org461ba50"></a>Silicone Tube<br />
+<div class="outline-text-5" id="text-1-2-1-9">
 <p>
 Sized that it can be connected to the parastolic pump. If the pump says it works with 6mm OD, 4mm ID then buy that.
 More than a meter worth but depends on the reseviour and plants you intend to water.
@@ -350,8 +366,8 @@ More than a meter worth but depends on the reseviour and plants you intend to wa
 </div>
 </li>
 
-<li><a id="org6fcaa34"></a>Power Supply<br />
-<div class="outline-text-5" id="text-1-2-1-9">
+<li><a id="orge153a2a"></a>Power Supply<br />
+<div class="outline-text-5" id="text-1-2-1-10">
 <p>
 &gt;= 5 watts, 8-12V.
 Nice to have a switch on it.
@@ -362,8 +378,8 @@ This should be the right voltage for the parastalic pump you selected with maybe
 </div>
 </li>
 
-<li><a id="org7c8f39b"></a>Prototype board (Optional)<br />
-<div class="outline-text-5" id="text-1-2-1-10">
+<li><a id="orgf97600a"></a>Prototype board (Optional)<br />
+<div class="outline-text-5" id="text-1-2-1-11">
 <p>
 Optional but makes a nicer final product than just connecting wires to each other.
 The one I linked also comes with nice little screw terminals to allow disconnecting wires easily.
@@ -371,16 +387,16 @@ The one I linked also comes with nice little screw terminals to allow disconnect
 </div>
 </li>
 
-<li><a id="org2f9e017"></a>Breadboard and jumpers<br />
-<div class="outline-text-5" id="text-1-2-1-11">
+<li><a id="org5a1230a"></a>Breadboard and jumpers<br />
+<div class="outline-text-5" id="text-1-2-1-12">
 <p>
 To make initial connections and debug issues without soldering and in a more organized manner than twisting wires.
 </p>
 </div>
 </li>
 
-<li><a id="org6b6ec4c"></a>5 Volt Regulator<br />
-<div class="outline-text-5" id="text-1-2-1-12">
+<li><a id="orga39a52a"></a>5 Volt Regulator<br />
+<div class="outline-text-5" id="text-1-2-1-13">
 <p>
 Can take the output of your power supply as input to create 5V.
 </p>
@@ -392,24 +408,24 @@ You can also use these if you have a higher voltage power supply, just also regu
 </div>
 </li>
 
-<li><a id="org99778d8"></a>Heat Shrink Tubing / Electrical Tape<br />
-<div class="outline-text-5" id="text-1-2-1-13">
+<li><a id="org1adcf55"></a>Heat Shrink Tubing / Electrical Tape<br />
+<div class="outline-text-5" id="text-1-2-1-14">
 <p>
 Or electrical tape to cover wire connections and prevent shorting.
 </p>
 </div>
 </li>
 
-<li><a id="org17b213e"></a>Soldering Iron (Optional)<br />
-<div class="outline-text-5" id="text-1-2-1-14">
+<li><a id="org59c0a39"></a>Soldering Iron (Optional)<br />
+<div class="outline-text-5" id="text-1-2-1-15">
 <p>
 Optional but recommended to connect wires together and use the prototype board.
 </p>
 </div>
 </li>
 
-<li><a id="orgd3d65c3"></a>Volt Meter<br />
-<div class="outline-text-5" id="text-1-2-1-15">
+<li><a id="orgb5aec66"></a>Volt Meter<br />
+<div class="outline-text-5" id="text-1-2-1-16">
 <p>
 To check polarity and voltages and such.
 </p>
@@ -418,8 +434,8 @@ To check polarity and voltages and such.
 </ol>
 </div>
 
-<div id="outline-container-org46991d9" class="outline-4">
-<h4 id="org46991d9"><span class="section-number-4">1.2.2</span> Assembly</h4>
+<div id="outline-container-orge6352f9" class="outline-4">
+<h4 id="orge6352f9"><span class="section-number-4">1.2.2</span> Assembly</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 If a pin is specified without telling you what its on, its on the ESP8266 WiFi board.
@@ -428,7 +444,7 @@ All the pins on the ESP8266 board we will be dealing with are on the same side, 
 </div>
 
 <ol class="org-ol">
-<li><a id="orgc90cf89"></a>Power Supply<br />
+<li><a id="org0fbc2a6"></a>Power Supply<br />
 <div class="outline-text-5" id="text-1-2-2-1">
 <p>
 Make two connections come off of both wires (4 total, two negative/black and two positive/red).
@@ -437,7 +453,7 @@ Connect one pair of positive/red and negative/black to the correct inputs of the
 </div>
 </li>
 
-<li><a id="orgd32e478"></a>ESP8266 WiFi Controller<br />
+<li><a id="org2ba7d87"></a>ESP8266 WiFi Controller<br />
 <div class="outline-text-5" id="text-1-2-2-2">
 <p>
 Connect the positive/red output from the 5V regulator to one of the 3V3 pins.
@@ -449,7 +465,7 @@ Connect the negative/black output from the 5V regulator to one of the GND pins.
 </div>
 </li>
 
-<li><a id="org93b027a"></a>Float Sensor<br />
+<li><a id="org8e14321"></a>Float Sensor (for HomeAssistant)<br />
 <div class="outline-text-5" id="text-1-2-2-3">
 <p>
 Connect one side to a GND pin and label it negative/black.
@@ -458,7 +474,7 @@ The other side goes to D6 and label it positive/red.
 </div>
 </li>
 
-<li><a id="orga10bf22"></a>Button<br />
+<li><a id="orgdbf15b2"></a>Button<br />
 <div class="outline-text-5" id="text-1-2-2-4">
 <p>
 Connect one side to a GND pin.
@@ -467,7 +483,7 @@ The other side goes to D5.
 </div>
 </li>
 
-<li><a id="orgc0c8bad"></a>Relay<br />
+<li><a id="org74470f6"></a>Relay<br />
 <div class="outline-text-5" id="text-1-2-2-5">
 <p>
 For different relays this is different but the instructions for the relay I had follow.
@@ -511,7 +527,7 @@ R6 to R2, then R5 to R1. Which ever pair is not connected is the normally open p
 </div>
 </li>
 
-<li><a id="org7020ee7"></a>Motor<br />
+<li><a id="org1debf97"></a>Motor<br />
 <div class="outline-text-5" id="text-1-2-2-6">
 <p>
 Connect the positive/red to the power supply positive/red.
@@ -519,17 +535,51 @@ The negative/black should be connected to the relay.
 </p>
 </div>
 </li>
+
+<li><a id="org8881666"></a>Water Container<br />
+<ol class="org-ol">
+<li><a id="org8473edc"></a>Float Sensor<br />
+<div class="outline-text-6" id="text-1-2-2-7-1">
+<p>
+I installed the float sensor using a length of plastic SharkBite pipe hot glued to threaded end.
+Then I dipped the float sensor down to the bottom of the container. This allows me to use different
+containers.
+</p>
+
+<p>
+You could also probably just drop the float sensor in and tape the wires to the lid of the bottle.
+I think its heavy enough to sink.
+</p>
+
+<p>
+The only thing of importance is the float sensor is currently configured such that it is switched on when
+the water level drops, and off when the water level is higher. If you flip the switch around or buy a different
+one, you might have to reconfigure it in HomeAssistant.
+</p>
+</div>
+</li>
+
+<li><a id="org63b1283"></a>Inlet Tube<br />
+<div class="outline-text-6" id="text-1-2-2-7-2">
+<p>
+Make sure the water inlet tube from the robot is nearish the bottom of the container and it can't
+fall out. The peristaltic pump makes the tubing vibrate a reasonable amount. If the tube falls out
+the pump is more than happy to pump air, but your plant doesn't drink air.
+</p>
+</div>
+</li>
+</ol>
+</li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orga73bdfb" class="outline-3">
-<h3 id="orga73bdfb"><span class="section-number-3">1.3</span> Software</h3>
+<div id="outline-container-org1e6fb3d" class="outline-3">
+<h3 id="org1e6fb3d"><span class="section-number-3">1.3</span> Software</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-org27efeb9" class="outline-4">
-<h4 id="org27efeb9"><span class="section-number-4">1.3.1</span> Clone Repos</h4>
+<div id="outline-container-orge37ada5" class="outline-4">
+<h4 id="orge37ada5"><span class="section-number-4">1.3.1</span> Clone Repos</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Clone/download this repo and its submodules to your computer.
@@ -553,8 +603,8 @@ plant_water/
 </div>
 </div>
 
-<div id="outline-container-org6271fad" class="outline-4">
-<h4 id="org6271fad"><span class="section-number-4">1.3.2</span> Building ESPurna</h4>
+<div id="outline-container-org6a79c45" class="outline-4">
+<h4 id="org6a79c45"><span class="section-number-4">1.3.2</span> Building ESPurna</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Naviage to plant_water/espurna/code.
@@ -562,7 +612,7 @@ Naviage to plant_water/espurna/code.
 </div>
 
 <ol class="org-ol">
-<li><a id="org2972b05"></a>Edits<br />
+<li><a id="orgc555609"></a>Edits<br />
 <div class="outline-text-5" id="text-1-3-2-1">
 <p>
 Only the credentials.h file is required to be edited. The other two are just things you can edit if need be.
@@ -571,7 +621,7 @@ The code included is an example of the file contents, see the actual files for u
 </div>
 
 <ol class="org-ol">
-<li><a id="org821df82"></a>WiFi Credentials<br />
+<li><a id="orgb63abb1"></a>WiFi Credentials<br />
 <div class="outline-text-6" id="text-1-3-2-1-1">
 <p>
 `code/espurna/config/credentials.h`
@@ -601,7 +651,7 @@ You can comment out the MQTT stuff to just not set it until later.
 </div>
 </li>
 
-<li><a id="orgdc9aff4"></a>ESP8266 Memory<br />
+<li><a id="org6e29e8a"></a>ESP8266 Memory<br />
 <div class="outline-text-6" id="text-1-3-2-1-2">
 <p>
 `code/platformio_override.ini`
@@ -619,7 +669,7 @@ src_build_flags = -DUSE_CUSTOM_H
 </div>
 </li>
 
-<li><a id="org2ede531"></a>Data Pins and Features<br />
+<li><a id="org4dfa66d"></a>Data Pins and Features<br />
 <div class="outline-text-6" id="text-1-3-2-1-3">
 <p>
 `code/espurna/config/custom.h`
@@ -766,7 +816,7 @@ The other configuration options have details at <a href="https://github.com/xose
 </ol>
 </li>
 
-<li><a id="org68a7727"></a>Compile firmware<br />
+<li><a id="org79c65f7"></a>Compile firmware<br />
 <div class="outline-text-5" id="text-1-3-2-2">
 <p>
 Plug in the ESP8266 board via USB.
@@ -785,8 +835,8 @@ From espurna/code run `./build.sh` to compile the project and flash it to a conn
 </ol>
 </div>
 
-<div id="outline-container-org191050b" class="outline-4">
-<h4 id="org191050b"><span class="section-number-4">1.3.3</span> Configure ESPurna</h4>
+<div id="outline-container-orgdeda394" class="outline-4">
+<h4 id="orgdeda394"><span class="section-number-4">1.3.3</span> Configure ESPurna</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 You also have to decide now if you want to run HomeAssistant to manage the watering device (more features and stuff)
@@ -797,7 +847,7 @@ Make sure to hit save on every page.
 </div>
 
 <ol class="org-ol">
-<li><a id="org233f949"></a>General<br />
+<li><a id="orga18cc4d"></a>General<br />
 <div class="outline-text-5" id="text-1-3-3-1">
 <p>
 Set the host name to something that makes sense like "PlantWater".
@@ -805,7 +855,7 @@ Set the host name to something that makes sense like "PlantWater".
 </div>
 </li>
 
-<li><a id="orgf9d0dcb"></a>HASS<br />
+<li><a id="org4a9501a"></a>HASS<br />
 <div class="outline-text-5" id="text-1-3-3-2">
 <ul class="org-ul">
 <li>Enable discovery.</li>
@@ -815,7 +865,7 @@ Set the host name to something that makes sense like "PlantWater".
 </div>
 </li>
 
-<li><a id="org43781be"></a>MQTT<br />
+<li><a id="orgb200f7c"></a>MQTT<br />
 <div class="outline-text-5" id="text-1-3-3-3">
 <p>
 Enable if it isn't already.
@@ -825,7 +875,7 @@ This needs to be done after HomeAssistant is setup.
 </div>
 </li>
 
-<li><a id="org107ffa0"></a>NPT<br />
+<li><a id="org1015965"></a>NPT<br />
 <div class="outline-text-5" id="text-1-3-3-4">
 <p>
 Set your timezone by finding it in the list at <a href="https://github.com/esp8266/Arduino/blob/master/cores/esp8266/TZ.h">https://github.com/esp8266/Arduino/blob/master/cores/esp8266/TZ.h</a>.
@@ -834,7 +884,7 @@ Then copy the bit between the quotes and paste it into the Time Zone field.
 </div>
 </li>
 
-<li><a id="org0e02343"></a>Schedule<br />
+<li><a id="org3ad951d"></a>Schedule<br />
 <div class="outline-text-5" id="text-1-3-3-5">
 <p>
 If you don't want to use HomeAssistant to control plant watering, just add a watering schedule here.
@@ -843,7 +893,7 @@ With Pulse Mode on you should only have to set a turn on schedule, the switch wi
 </div>
 </li>
 
-<li><a id="org003e5ec"></a>Sensors<br />
+<li><a id="org3db82da"></a>Sensors<br />
 <div class="outline-text-5" id="text-1-3-3-6">
 <ul class="org-ul">
 <li>Read interval is how often to check whether the water is empty or not. Set it accordingly to something like 1 minute.</li>
@@ -852,7 +902,7 @@ With Pulse Mode on you should only have to set a turn on schedule, the switch wi
 </div>
 </li>
 
-<li><a id="org4082da9"></a>Switches<br />
+<li><a id="org945d6a8"></a>Switches<br />
 <div class="outline-text-5" id="text-1-3-3-7">
 <p>
 Setting first, the value after the colons.
@@ -868,7 +918,7 @@ Setting first, the value after the colons.
 </div>
 </li>
 
-<li><a id="org5299e3c"></a>WiFi<br />
+<li><a id="orgc4af844"></a>WiFi<br />
 <div class="outline-text-5" id="text-1-3-3-8">
 <p>
 Here you can add more WiFi networks and change the WiFi password.
@@ -877,7 +927,7 @@ If you only have one WiFi network, turn off Scan. This results in better perform
 </div>
 </li>
 
-<li><a id="orgf862a6b"></a>Debug<br />
+<li><a id="org00e44a0"></a>Debug<br />
 <div class="outline-text-5" id="text-1-3-3-9">
 <p>
 This just lists what the device is doing. You can also use it to turn things on and off, see for details <a href="https://github.com/xoseperez/espurna/wiki/Terminal">https://github.com/xoseperez/espurna/wiki/Terminal</a>.
@@ -887,8 +937,8 @@ This just lists what the device is doing. You can also use it to turn things on 
 </ol>
 </div>
 
-<div id="outline-container-orge2a5334" class="outline-4">
-<h4 id="orge2a5334"><span class="section-number-4">1.3.4</span> Install HomeAssistant</h4>
+<div id="outline-container-org378ec8e" class="outline-4">
+<h4 id="org378ec8e"><span class="section-number-4">1.3.4</span> Install HomeAssistant</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 Go through the Getting Started guide at <a href="https://www.home-assistant.io/getting-started/">https://www.home-assistant.io/getting-started/</a>.
@@ -908,8 +958,8 @@ Install the File Editor Addon: <a href="https://www.home-assistant.io/getting-st
 </div>
 </div>
 
-<div id="outline-container-orgdc51cfe" class="outline-4">
-<h4 id="orgdc51cfe"><span class="section-number-4">1.3.5</span> Configure HomeAssistant</h4>
+<div id="outline-container-org3de1ad8" class="outline-4">
+<h4 id="org3de1ad8"><span class="section-number-4">1.3.5</span> Configure HomeAssistant</h4>
 <div class="outline-text-4" id="text-1-3-5">
 <p>
 Configure the broker URL information to use your dedicated server or the MQTT Server Addon.
@@ -918,7 +968,7 @@ You should see your Plant Water device in Configuration &gt; Devices.
 </div>
 
 <ol class="org-ol">
-<li><a id="org0d248a0"></a>Configure Water Button<br />
+<li><a id="orgb8bfe6f"></a>Configure Water Button<br />
 <div class="outline-text-5" id="text-1-3-5-1">
 <p>
 Use the File Editor addon to edit the configuration.yaml file.
@@ -944,7 +994,7 @@ switch:
 </div>
 </li>
 
-<li><a id="org8ef966f"></a>Make the water level sensor nicer<br />
+<li><a id="org45b2ed3"></a>Make the water level sensor nicer<br />
 <div class="outline-text-5" id="text-1-3-5-2">
 <p>
 A water level of 0 or 1 is fine and all, but "Not Empty" and "Empty" is nicer. This does that.
@@ -974,7 +1024,7 @@ sensor:
 </div>
 
 <ol class="org-ol">
-<li><a id="org7b8c29c"></a>Change the state_topic and command_topic<br />
+<li><a id="org3139cf6"></a>Change the state_topic and command_topic<br />
 <div class="outline-text-6" id="text-1-3-5-2-1">
 <p>
 The command_topic is set to the the MQTT topic subscription value on your ESPurna.
@@ -988,7 +1038,7 @@ relay every time it changes, or the state of the plant watering.
 </div>
 </li>
 
-<li><a id="orgbb9f86c"></a>Change sensor.plantwater_digital_0<br />
+<li><a id="orgdb375de"></a>Change sensor.plantwater_digital_0<br />
 <div class="outline-text-6" id="text-1-3-5-2-2">
 <p>
 Save your changes and go to the Overview page.
@@ -1005,12 +1055,12 @@ Back to the File Editor and paste it in place of sensor.platwater_digital_0 in b
 </div>
 
 
-<div id="outline-container-org97281e9" class="outline-4">
-<h4 id="org97281e9"><span class="section-number-4">1.3.6</span> Problems and Solutions</h4>
+<div id="outline-container-org589f1f4" class="outline-4">
+<h4 id="org589f1f4"><span class="section-number-4">1.3.6</span> Problems and Solutions</h4>
 <div class="outline-text-4" id="text-1-3-6">
 </div>
 <ol class="org-ol">
-<li><a id="orgf6a8ea5"></a>Don't See Plant Water Device in Home Assistant<br />
+<li><a id="orge83a8cf"></a>Don't See Plant Water Device in Home Assistant<br />
 <div class="outline-text-5" id="text-1-3-6-1">
 <p>
 Check whether it has made a post at homeassistant/# by using a MQTT client to subscript to that.
@@ -1031,7 +1081,7 @@ Also make sure your firewall allows the port that your MQTT broker is using.
 </p>
 </div>
 </li>
-<li><a id="org3d9ca6f"></a>Random Crashing and restarting<br />
+<li><a id="orge703993"></a>Random Crashing and restarting<br />
 <div class="outline-text-5" id="text-1-3-6-2">
 <p>
 Identified by looking at the serial output, basically it says it restarted or that it crashed.
@@ -1041,7 +1091,7 @@ Use the RST button once its connected to see all the serial output, and make sur
 </div>
 
 <ol class="org-ol">
-<li><a id="org0101906"></a>Try erasing the flash<br />
+<li><a id="org754b6bd"></a>Try erasing the flash<br />
 <div class="outline-text-6" id="text-1-3-6-2-1">
 <p>
 Use `esptool.py &#x2013;port /dev/ttyUSB0 erase_flash`.
@@ -1050,7 +1100,7 @@ It seems that when developing and flashing, sometimes it leaves code in the flas
 </div>
 </li>
 
-<li><a id="org09a0c91"></a>Disable features<br />
+<li><a id="orgf6370a1"></a>Disable features<br />
 <div class="outline-text-6" id="text-1-3-6-2-2">
 <p>
 Try commenting out the LED stuff in custom.h. I have found that can cause problems.
@@ -1059,7 +1109,7 @@ Also try commenting out other entire features or disabling things and reflashing
 </div>
 </li>
 
-<li><a id="orgb16ec08"></a>Update ESPurna Git<br />
+<li><a id="orgc02e029"></a>Update ESPurna Git<br />
 <div class="outline-text-6" id="text-1-3-6-2-3">
 <p>
 You can navigate into espurna/code and do 'git pull upstream'.
@@ -1068,7 +1118,7 @@ Then save the merge file it opens and try building with any new changes in devel
 </div>
 </li>
 
-<li><a id="orge79cc66"></a>Create an issue on this Github repo<br />
+<li><a id="org1bd7260"></a>Create an issue on this Github repo<br />
 <div class="outline-text-6" id="text-1-3-6-2-4">
 <p>
 I'll see if I can help out or fix the problem.
@@ -1083,7 +1133,7 @@ I'll see if I can help out or fix the problem.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-04-20 Tue 14:00</p>
+<p class="date">Created: 2021-04-20 Tue 14:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

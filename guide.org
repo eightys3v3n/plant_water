@@ -10,8 +10,8 @@
    
 ** Hardware
 *** Materials
-    See spreadsheet for Amazon links and prices.
-    Estimated cost to make one is between $70 and $150 at the time of making this guide, depending on what you have already.
+    Estimated cost to make one is between $70 and $150 at the time of making this guide,
+    depending on what you have already. See the Excel or Google sheet for more info on specific parts.
     https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing
 
 **** Water Container
