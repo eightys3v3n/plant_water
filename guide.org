@@ -1,6 +1,7 @@
 * Instructions
   This project results in a plant watering robot connected to the internet of things.
   It costs as low as $40 if you scavenge components or as much as $150 if you purchase everything new from Amazon.
+
   
 ** Requirements
    Running Linux or you must use the Arduino-IDE to compile and flash the code.
@@ -12,6 +13,11 @@
     See spreadsheet for Amazon links and prices.
     Estimated cost to make one is between $70 and $150 at the time of making this guide, depending on what you have already.
     https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing
+
+**** Water Container
+     Some kind of container you can put the float sensor and a tube into. The robot will pull water from there to water
+     plants with the other tube.
+     I used a 4L jug of water.
     
 **** Project Box
      Something sorta water resistant (don't want to spill water on it and wreck it) to put your electronics and pump into.
@@ -92,7 +98,7 @@
      ESP8266 depending on which one you buy.
      Connect the negative/black output from the 5V regulator to one of the GND pins.
     
-**** Float Sensor
+**** Float Sensor (for HomeAssistant)
      Connect one side to a GND pin and label it negative/black.
      The other side goes to D6 and label it positive/red.
 
@@ -135,7 +141,24 @@
      Connect the positive/red to the power supply positive/red.
      The negative/black should be connected to the relay.
 
-     
+**** Water Container
+***** Float Sensor
+      I installed the float sensor using a length of plastic SharkBite pipe hot glued to threaded end.
+      Then I dipped the float sensor down to the bottom of the container. This allows me to use different
+      containers.
+
+      You could also probably just drop the float sensor in and tape the wires to the lid of the bottle.
+      I think its heavy enough to sink.
+
+      The only thing of importance is the float sensor is currently configured such that it is switched on when
+      the water level drops, and off when the water level is higher. If you flip the switch around or buy a different
+      one, you might have to reconfigure it in HomeAssistant.
+
+***** Inlet Tube
+      Make sure the water inlet tube from the robot is nearish the bottom of the container and it can't
+      fall out. The peristaltic pump makes the tubing vibrate a reasonable amount. If the tube falls out
+      the pump is more than happy to pump air, but your plant doesn't drink air.
+
 ** Software
 *** Clone Repos
    Clone/download this repo and its submodules to your computer.
