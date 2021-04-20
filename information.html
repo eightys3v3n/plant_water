@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-04-20 Tue 14:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org90b6c9c">1. Instructions</a>
+<ul>
+<li><a href="#org62e7e77">1.1. Requirements</a></li>
+<li><a href="#org868c60e">1.2. Hardware</a>
+<ul>
+<li><a href="#org368a6cf">1.2.1. Materials</a></li>
+<li><a href="#org46991d9">1.2.2. Assembly</a></li>
+</ul>
+</li>
+<li><a href="#orga73bdfb">1.3. Software</a>
+<ul>
+<li><a href="#org27efeb9">1.3.1. Clone Repos</a></li>
+<li><a href="#org6271fad">1.3.2. Building ESPurna</a></li>
+<li><a href="#org191050b">1.3.3. Configure ESPurna</a></li>
+<li><a href="#orge2a5334">1.3.4. Install HomeAssistant</a></li>
+<li><a href="#orgdc51cfe">1.3.5. Configure HomeAssistant</a></li>
+<li><a href="#org97281e9">1.3.6. Problems and Solutions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org90b6c9c" class="outline-2">
+<h2 id="org90b6c9c"><span class="section-number-2">1</span> Instructions</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org62e7e77" class="outline-3">
+<h3 id="org62e7e77"><span class="section-number-3">1.1</span> Requirements</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Running Linux or you must use the Arduino-IDE to compile and flash the code.
+This isn't covered here but it is on <a href="https://github.com/xoseperez/espurna/wiki/ArduinoIDE">https://github.com/xoseperez/espurna/wiki/ArduinoIDE</a>.
+Have pio, esptool, gcc installed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org868c60e" class="outline-3">
+<h3 id="org868c60e"><span class="section-number-3">1.2</span> Hardware</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org368a6cf" class="outline-4">
+<h4 id="org368a6cf"><span class="section-number-4">1.2.1</span> Materials</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+See spreadsheet for Amazon links and prices.
+Estimated cost to make one is between $70 and $150 at the time of making this guide, depending on what you have already.
+<a href="https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing</a>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org5a61f5a"></a>Project Box<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+Something sorta water resistant (don't want to spill water on it and wreck it) to put your electronics and pump into.
+You also have to be able to get the hoses out and power into the box.
+I would just use a small cardboard box to start. Once everything is assembled you can
+pick out a proper plastic box to order on Amazon depending on what you want it to
+look like and the size you would like. I purchased two of these, one for the motor
+and one for the electronics in case of leaks.
+</p>
+</div>
+</li>
+
+<li><a id="orgf66975a"></a>Control Board with WiFi<br />
+<div class="outline-text-5" id="text-1-2-1-2">
+<p>
+An ESP8266 device, I used the NodeMCU-12E board available on Amazon and elsewhere.
+This board should be capable of running at 5V to switch a 5V relay. The NodeMCU-12E
+is rated for 3.3V but can usually run at 5V without issue.
+</p>
+</div>
+</li>
+
+<li><a id="org1347908"></a>Relay<br />
+<div class="outline-text-5" id="text-1-2-1-3">
+<p>
+A 5V relay that can switch 8-12 volts DC.
+You connect the motor power through this, and the ESP8266 can tell it to turn the motor on and off.
+</p>
+</div>
+</li>
+
+<li><a id="org711c9c9"></a>Button (optional)<br />
+<div class="outline-text-5" id="text-1-2-1-4">
+<p>
+Just a push button from an arduino kit.
+</p>
+</div>
+</li>
+
+<li><a id="org879227b"></a>Float Sensor<br />
+<div class="outline-text-5" id="text-1-2-1-5">
+<p>
+Something to tell you when the water level is low so your plant doesn't die.
+</p>
+</div>
+</li>
+
+<li><a id="org872f5c9"></a>Wire<br />
+<div class="outline-text-5" id="text-1-2-1-6">
+<p>
+Just some extra wire to conenct things with.
+</p>
+</div>
+</li>
+
+<li><a id="orgb169562"></a>Parastolic Pump<br />
+<div class="outline-text-5" id="text-1-2-1-7">
+<p>
+A small parastolic pump.
+5 Watts is what I purchased.
+It should run at a decent speed when powered by whatever power supply you selected.
+</p>
+</div>
+</li>
+
+<li><a id="org33b6c6f"></a>Silicone Tube<br />
+<div class="outline-text-5" id="text-1-2-1-8">
+<p>
+Sized that it can be connected to the parastolic pump. If the pump says it works with 6mm OD, 4mm ID then buy that.
+More than a meter worth but depends on the reseviour and plants you intend to water.
+</p>
+</div>
+</li>
+
+<li><a id="org6fcaa34"></a>Power Supply<br />
+<div class="outline-text-5" id="text-1-2-1-9">
+<p>
+&gt;= 5 watts, 8-12V.
+Nice to have a switch on it.
+The end cut off so its just two wires; mark the positive and negative with a volt meter if it isn't marked.
+I grabbed an old LED light power supply.
+This should be the right voltage for the parastalic pump you selected with maybe an amp more than the motor requires.
+</p>
+</div>
+</li>
+
+<li><a id="org7c8f39b"></a>Prototype board (Optional)<br />
+<div class="outline-text-5" id="text-1-2-1-10">
+<p>
+Optional but makes a nicer final product than just connecting wires to each other.
+The one I linked also comes with nice little screw terminals to allow disconnecting wires easily.
+</p>
+</div>
+</li>
+
+<li><a id="org2f9e017"></a>Breadboard and jumpers<br />
+<div class="outline-text-5" id="text-1-2-1-11">
+<p>
+To make initial connections and debug issues without soldering and in a more organized manner than twisting wires.
+</p>
+</div>
+</li>
+
+<li><a id="org6b6ec4c"></a>5 Volt Regulator<br />
+<div class="outline-text-5" id="text-1-2-1-12">
+<p>
+Can take the output of your power supply as input to create 5V.
+</p>
+
+<p>
+Very useful for other projects, variable output voltage (just set it to 5V with a volt meter).
+You can also use these if you have a higher voltage power supply, just also regulate the motor voltage with another one.
+</p>
+</div>
+</li>
+
+<li><a id="org99778d8"></a>Heat Shrink Tubing / Electrical Tape<br />
+<div class="outline-text-5" id="text-1-2-1-13">
+<p>
+Or electrical tape to cover wire connections and prevent shorting.
+</p>
+</div>
+</li>
+
+<li><a id="org17b213e"></a>Soldering Iron (Optional)<br />
+<div class="outline-text-5" id="text-1-2-1-14">
+<p>
+Optional but recommended to connect wires together and use the prototype board.
+</p>
+</div>
+</li>
+
+<li><a id="orgd3d65c3"></a>Volt Meter<br />
+<div class="outline-text-5" id="text-1-2-1-15">
+<p>
+To check polarity and voltages and such.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org46991d9" class="outline-4">
+<h4 id="org46991d9"><span class="section-number-4">1.2.2</span> Assembly</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+If a pin is specified without telling you what its on, its on the ESP8266 WiFi board.
+All the pins on the ESP8266 board we will be dealing with are on the same side, the ones labeled D1, D2&#x2026;
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgc90cf89"></a>Power Supply<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+Make two connections come off of both wires (4 total, two negative/black and two positive/red).
+Connect one pair of positive/red and negative/black to the correct inputs of the 5V regulator.
+</p>
+</div>
+</li>
+
+<li><a id="orgd32e478"></a>ESP8266 WiFi Controller<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<p>
+Connect the positive/red output from the 5V regulator to one of the 3V3 pins.
+Note: We are connecting 5V to the 3.3V pins and Not the 5V input pin. The relay requires 5V so we have to
+run the ESP8266 over voltage at 5V so the data pins can switch the relay. This may shorten the life of the
+ESP8266 depending on which one you buy.
+Connect the negative/black output from the 5V regulator to one of the GND pins.
+</p>
+</div>
+</li>
+
+<li><a id="org93b027a"></a>Float Sensor<br />
+<div class="outline-text-5" id="text-1-2-2-3">
+<p>
+Connect one side to a GND pin and label it negative/black.
+The other side goes to D6 and label it positive/red.
+</p>
+</div>
+</li>
+
+<li><a id="orga10bf22"></a>Button<br />
+<div class="outline-text-5" id="text-1-2-2-4">
+<p>
+Connect one side to a GND pin.
+The other side goes to D5.
+</p>
+</div>
+</li>
+
+<li><a id="orgc0c8bad"></a>Relay<br />
+<div class="outline-text-5" id="text-1-2-2-5">
+<p>
+For different relays this is different but the instructions for the relay I had follow.
+Generally, you want the relay coil going to GND and D7, one side of the switch going to the power supply GND and the other side going to the motor GND.
+Also I am using a normally closed relay. If you have a normally open relay you need to change RELAY1_TYPE from RELAY_TYPE_NORMAL to RELAY_TYPE_INVERSE.
+See <a href="https://github.com/xoseperez/espurna/wiki/Buttons-and-switches">https://github.com/xoseperez/espurna/wiki/Buttons-and-switches</a>.
+</p>
+
+<p>
+We will label the relay pins as such:
+</p>
+<pre class="example">
++------+
+|*    *|
+|      |
+|      |
+|      |
+|*    *|
+|*    *|
++------+
+</pre>
+<ul class="org-ul">
+<li>top left as R1</li>
+<li>top right as R2</li>
+<li>middle left as R3</li>
+<li>middle right as R4</li>
+<li>bottom left as R5</li>
+<li>bottom right as R6</li>
+</ul>
+
+<p>
+To figure out which side of the relay is normally open, use your multimeter to test for continuity between
+R6 to R2, then R5 to R1. Which ever pair is not connected is the normally open pair. Use that pair for below.  
+</p>
+
+<ul class="org-ul">
+<li>One of R3 or R4 goes to D7, the other goes to GND.</li>
+<li>Connect either R1 or R2 (the normally open one) to the power supply negative/black.</li>
+<li>Connect eitther R5 or R6 (the normally open one) to the motor's negative/black.</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org7020ee7"></a>Motor<br />
+<div class="outline-text-5" id="text-1-2-2-6">
+<p>
+Connect the positive/red to the power supply positive/red.
+The negative/black should be connected to the relay.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orga73bdfb" class="outline-3">
+<h3 id="orga73bdfb"><span class="section-number-3">1.3</span> Software</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org27efeb9" class="outline-4">
+<h4 id="org27efeb9"><span class="section-number-4">1.3.1</span> Clone Repos</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Clone/download this repo and its submodules to your computer.
+Use `git clone &#x2013;recurse-submodules <a href="https://github.com/eightys3v3n/plant_water.git">https://github.com/eightys3v3n/plant_water.git</a>`.
+</p>
+
+<p>
+If you just download a zip of the repository, you must also go download a zip of the latest espurna repository
+and put it in the espurna folder inside plant_water.
+Download it from <a href="https://github.com/eightys3v3n/espurna/tree/plant_water">https://github.com/eightys3v3n/espurna/tree/plant_water</a>.
+The directory tree should look like this when you're ready.
+</p>
+<pre class="example">
+plant_water/
+  espurna/
+    code/
+    firmware/
+    ...
+  information.org
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6271fad" class="outline-4">
+<h4 id="org6271fad"><span class="section-number-4">1.3.2</span> Building ESPurna</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Naviage to plant_water/espurna/code.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org2972b05"></a>Edits<br />
+<div class="outline-text-5" id="text-1-3-2-1">
+<p>
+Only the credentials.h file is required to be edited. The other two are just things you can edit if need be.
+The code included is an example of the file contents, see the actual files for up to date contents.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org821df82"></a>WiFi Credentials<br />
+<div class="outline-text-6" id="text-1-3-2-1-1">
+<p>
+`code/espurna/config/credentials.h`
+</p>
+
+<p>
+You have to make this file, but you don't have to have anything in it.
+You can set this up once you flash the ESP8266 by connecting to its WiFi network, it just takes longer
+than setting them in this file.
+If you plan on using HomeAssistant you'll probably have to set up MQTT after you setup Home Assistant's built in broker.
+You can comment out the MQTT stuff to just not set it until later.
+</p>
+<pre class="example">
+#define WEB_USERNAME "Username for ESPurna web interface"
+#define ADMIN_PASS "Password for ESPurna web interface"
+
+#define WIFI1_SSID "SSID for 2.4Ghz WiFi"
+#define WIFI1_PASS "Password for WiFi"
+
+#define MQTT_AUTOCONNECT 1
+#define MQTT_USER "MQTT server username"
+#define MQTT_PASS "MQTT server password"
+#define MQTT_PORT 1883
+#define MQTT_SERVER "MQTT server IP address"
+#define MQTT_QOS 2
+</pre>
+</div>
+</li>
+
+<li><a id="orgdc9aff4"></a>ESP8266 Memory<br />
+<div class="outline-text-6" id="text-1-3-2-1-2">
+<p>
+`code/platformio_override.ini`
+</p>
+
+<p>
+-4m- is the megabytes of memory on the selected ESP8266 device. You may need to change this to 1m if you have a
+board with less memory.
+</p>
+<pre class="example">
+[env:plant_water]
+extends = env:esp8266-4m-base
+src_build_flags = -DUSE_CUSTOM_H
+</pre>
+</div>
+</li>
+
+<li><a id="org2ede531"></a>Data Pins and Features<br />
+<div class="outline-text-6" id="text-1-3-2-1-3">
+<p>
+`code/espurna/config/custom.h`
+</p>
+
+<p>
+Converting pin numbers from D0, D1&#x2026; to code compatible <a href="https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/">https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/</a>.
+LED1_PIN 2 means the LED is connected to GPIO2, which is correct for NodeMCU 1.0 devices but changes for other ESP8266 devices. If not sure comment this whole section out.
+RELAY1_PIN 13 means we connect the relay switch to pin D7.
+BUTTON2_PIN 14 means we connect the button to D5.
+DIGITAL1_PIN 12 means we connect the float sensor to D6.
+The button2 stuff lets you use your extra button to turn on and off the sensor. Information about how to customize it is on the wiki.
+The other configuration options have details at <a href="https://github.com/xoseperez/espurna/wiki">https://github.com/xoseperez/espurna/wiki</a>.
+</p>
+<pre class="example">
+// Prevents checking of default options for this board.
+#define MANUFACTURER        "NODEMCU"
+#define DEVICE              "LOLIN"
+
+
+// Features
+#define ALEXA_SUPPORT          0
+#define API_SUPPORT            1
+#define BUTTON_SUPPORT         0
+#define DEBUG_SERIAL_SUPPORT   1
+#define DEBUG_TELNET_SUPPORT   0
+#define DEBUG_UDP_SUPPORT      0
+#define DEBUG_WEB_SUPPORT      1
+#define DOMOTICZ_SUPPORT       0
+#define ENCODER_SUPPORT        1
+#define HOMEASSISTANT_SUPPORT  1
+#define I2C_SUPPORT            0
+#define INFLUXDB_SUPPORT       0
+#define IR_SUPPORT             0
+#define LED_SUPPORT            1
+#define LLMNR_SUPPORT          0
+#define MDNS_SERVER_SUPPORT    0
+#define MQTT_SUPPORT           1
+#define NETBIOS_SUPPORT        0
+#define NOFUSS_SUPPORT         1
+#define NTP_SUPPORT            1
+#define OTA_ARDUINOOTA_SUPPORT 0
+#define RFM69_SUPPORT          0
+#define RFB_SUPPORT            0
+#define RPN_RULES_SUPPORT      0
+#define SCHEDULER_SUPPORT      1
+#define SPIFFS_SUPPORT         0
+#define SSDP_SUPPORT           0
+#define TELNET_SUPPORT         0
+#define TERMINAL_SUPPORT       1
+#define TERMINAL_MQTT_SUPPORT  0
+#define TERMINAL_WEB_API_SUPPORT 0
+#define THINGSPEAK_SUPPORT     0
+#define TUYA_SUPPORT           0
+#define UART_MQTT_SUPPORT      0
+#define WEB_SUPPORT            1
+
+
+// Sensors
+#define ADE7953_SUPPORT        0
+#define AM2320_SUPPORT         0
+#define ANALOG_SUPPORT         0
+#define BH1750_SUPPORT         0
+#define BMP180_SUPPORT         0
+#define BMX280_SUPPORT         0
+#define BME680_SUPPORT         0
+#define CSE7766_SUPPORT        0
+#define DALLAS_SUPPORT         0
+#define DHT_SUPPORT            0
+#define DIGITAL_SUPPORT        1
+#define ECH1560_SUPPORT        0
+#define EMON_ADC121_SUPPORT    0
+#define EMON_ADS1X15_SUPPORT   0
+#define EMON_ANALOG_SUPPORT    0
+#define EVENTS_SUPPORT         0
+#define EZOPH_SUPPORT          0
+#define GEIGER_SUPPORT         0
+#define GUVAS12SD_SUPPORT      0
+#define HLW8012_SUPPORT        0
+#define LDR_SUPPORT            0
+#define MAX6675_SUPPORT        0
+#define MHZ19_SUPPORT          0
+#define MICS2710_SUPPORT       0
+#define MICS5525_SUPPORT       0
+#define NTC_SUPPORT            0
+#define PMSX003_SUPPORT        0
+#define PULSEMETER_SUPPORT     0
+#define PZEM004T_SUPPORT       0
+#define SDS011_SUPPORT         0
+#define SENSEAIR_SUPPORT       0
+#define SHT3X_I2C_SUPPORT      0
+#define SI7021_SUPPORT         0
+#define SONAR_SUPPORT          0
+#define T6613_SUPPORT          0
+#define THERMOSTAT_SUPPORT     0
+#define TMP3X_SUPPORT          0
+#define V9261F_SUPPORT         0
+#define VEML6075_SUPPORT       0
+#define VL53L1X_SUPPORT        0
+#define HDC1080_SUPPORT        0
+
+
+// Configuration
+#define LIGHT_SAVE_ENABLED 0
+#define BUTTON_MQTT_SEND_ALL_EVENTS 1
+#define MQTT_RETAIN 0
+#define MQTT_ENABLED 1
+#define HOMEASSISTANT_ENABLED 1
+
+// Make the built in LED flash on WiFi activity
+#define LED1_PIN 2
+#define LED1_PIN_INVERSE 1
+#define LED1_MODE LED_MODE_WIFI
+
+// For the motor relay
+#define RELAY1_PIN 13
+#define RELAY1_TYPE RELAY_TYPE_NORMAL
+#define RELAY1_PULSE_MODE RELAY_PULSE_OFF // defaults to being off (not watering)
+#define RELAY1_PULSE_TIME 20 // number of seconds the relay can stay on for
+
+// Built-in flash button
+#define BUTTON1_PIN 0
+#define BUTTON1_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH
+#define BUTTON1_LNGCLICK BUTTON_ACTION_NONE
+
+// Extra external button
+#define BUTTON2_PIN 14
+#define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+#define BUTTON2_PRESS BUTTON_ACTION_PULSE
+#define BUTTON2_CLICK BUTTON_ACTION_NONE
+#define BUTTON2_RELEASE BUTTON_ACTION_OFF
+#define BUTTON2_DBLCLICK BUTTON_ACTION_TOGGLE
+#define BUTTON2_RELAY 1
+
+// Float sensor
+#define DIGITAL1_PIN 12
+
+
+// Secret Configuration
+#include "credentials.h"
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org68a7727"></a>Compile firmware<br />
+<div class="outline-text-5" id="text-1-3-2-2">
+<p>
+Plug in the ESP8266 board via USB.
+</p>
+
+<p>
+Some times you may need to reflash the entire ESP8266 memory to avoid issues,
+Use `esptool.py erase_flash` to do that before running the above commands if you encounter random crashes.
+</p>
+
+<p>
+From espurna/code run `./build.sh` to compile the project and flash it to a connected deivce.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org191050b" class="outline-4">
+<h4 id="org191050b"><span class="section-number-4">1.3.3</span> Configure ESPurna</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+You also have to decide now if you want to run HomeAssistant to manage the watering device (more features and stuff)
+or just use the device its self (easier).
+Now that ESPurna is flashed, we have a few options we can change on the following tabs.
+Make sure to hit save on every page.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org233f949"></a>General<br />
+<div class="outline-text-5" id="text-1-3-3-1">
+<p>
+Set the host name to something that makes sense like "PlantWater".
+</p>
+</div>
+</li>
+
+<li><a id="orgf9d0dcb"></a>HASS<br />
+<div class="outline-text-5" id="text-1-3-3-2">
+<ul class="org-ul">
+<li>Enable discovery.</li>
+<li>Leave the prefix as homeassistant if you don't know what this does. Its default.</li>
+<li>Retain to yes. This means Home Assistant sees if the device has ever existed and adds it rather than waiting for it to say "Hello".</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org43781be"></a>MQTT<br />
+<div class="outline-text-5" id="text-1-3-3-3">
+<p>
+Enable if it isn't already.
+Also enter your HomeAssistant broker details here if you aren't using your own broker.
+This needs to be done after HomeAssistant is setup.
+</p>
+</div>
+</li>
+
+<li><a id="org107ffa0"></a>NPT<br />
+<div class="outline-text-5" id="text-1-3-3-4">
+<p>
+Set your timezone by finding it in the list at <a href="https://github.com/esp8266/Arduino/blob/master/cores/esp8266/TZ.h">https://github.com/esp8266/Arduino/blob/master/cores/esp8266/TZ.h</a>.
+Then copy the bit between the quotes and paste it into the Time Zone field.
+</p>
+</div>
+</li>
+
+<li><a id="org0e02343"></a>Schedule<br />
+<div class="outline-text-5" id="text-1-3-3-5">
+<p>
+If you don't want to use HomeAssistant to control plant watering, just add a watering schedule here.
+With Pulse Mode on you should only have to set a turn on schedule, the switch will turn off after the pulse time.
+</p>
+</div>
+</li>
+
+<li><a id="org003e5ec"></a>Sensors<br />
+<div class="outline-text-5" id="text-1-3-3-6">
+<ul class="org-ul">
+<li>Read interval is how often to check whether the water is empty or not. Set it accordingly to something like 1 minute.</li>
+<li>Change "Report every" to 1.</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org4082da9"></a>Switches<br />
+<div class="outline-text-5" id="text-1-3-3-7">
+<p>
+Setting first, the value after the colons.
+</p>
+
+<dl class="org-dl">
+<dt>Boot mode</dt><dd>Always Off</dd>
+<dt>Pulse mode</dt><dd>Normally Off</dd>
+<dt>Pulse time</dt><dd>The maximum time we should be able to water the plant. It auto-stops watering after this many seconds if you don't turn it off.</dd>
+<dt>MQTT topic subscription</dt><dd>Set this to something like "PlantWater/water" if using HomeAssistant. Home Assistant uses this to tell it to water the plants.</dd>
+<dt>On MQTT disconnect</dt><dd>Turn off</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="org5299e3c"></a>WiFi<br />
+<div class="outline-text-5" id="text-1-3-3-8">
+<p>
+Here you can add more WiFi networks and change the WiFi password.
+If you only have one WiFi network, turn off Scan. This results in better performance when the WiFi signal is low.
+</p>
+</div>
+</li>
+
+<li><a id="orgf862a6b"></a>Debug<br />
+<div class="outline-text-5" id="text-1-3-3-9">
+<p>
+This just lists what the device is doing. You can also use it to turn things on and off, see for details <a href="https://github.com/xoseperez/espurna/wiki/Terminal">https://github.com/xoseperez/espurna/wiki/Terminal</a>.
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orge2a5334" class="outline-4">
+<h4 id="orge2a5334"><span class="section-number-4">1.3.4</span> Install HomeAssistant</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Go through the Getting Started guide at <a href="https://www.home-assistant.io/getting-started/">https://www.home-assistant.io/getting-started/</a>.
+</p>
+
+<p>
+Once you have HomeAssistant up and running, if you have a dedicated MQTT server: <a href="https://www.home-assistant.io/docs/mqtt/broker/">https://www.home-assistant.io/docs/mqtt/broker/</a>.
+</p>
+
+<p>
+If you don't have a dedicated MQTT server: <a href="https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md">https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md</a>
+</p>
+
+<p>
+Install the File Editor Addon: <a href="https://www.home-assistant.io/getting-started/configuration/">https://www.home-assistant.io/getting-started/configuration/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdc51cfe" class="outline-4">
+<h4 id="orgdc51cfe"><span class="section-number-4">1.3.5</span> Configure HomeAssistant</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+Configure the broker URL information to use your dedicated server or the MQTT Server Addon.
+You should see your Plant Water device in Configuration &gt; Devices.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org0d248a0"></a>Configure Water Button<br />
+<div class="outline-text-5" id="text-1-3-5-1">
+<p>
+Use the File Editor addon to edit the configuration.yaml file.
+Add the following in and make changes. The PlantWater should be changed to the Hostname of your device.
+After making changes, go to Configuration &gt; Server Controls &gt; Restart.
+If there are any errors they will show up in Configuration &gt; Logs.
+On the Overview page you should now have a switch that when toggled, waters the plant, then toggles its self off again (thanksto pulse mode on ESPurna).
+</p>
+
+<pre class="example">
+switch:
+  - platform: mqtt
+    unique_id: watering_plant
+    name: Watering Plant
+    state_topic: "PlantWater/relay/0"
+    command_topic: "PlantWater/water"
+    payload_on: 1
+    payload_off: 0
+    optimistic: false
+    qos: 2
+    retain: false
+</pre>
+</div>
+</li>
+
+<li><a id="org8ef966f"></a>Make the water level sensor nicer<br />
+<div class="outline-text-5" id="text-1-3-5-2">
+<p>
+A water level of 0 or 1 is fine and all, but "Not Empty" and "Empty" is nicer. This does that.
+Do the same as configuring the water button but with the below stuff now a new sensor will show up on Overview.
+</p>
+
+<pre class="example">
+sensor:
+  - platform: template
+    sensors:
+        plant_water_level:
+          friendly_name: Plant Water Level
+          unique_id: sensor.plant_water_level
+          value_template: &gt;
+            {% if is_state('sensor.plantwater_digital_0', '0') %}
+              Not Empty
+            {% else %}
+              Empty
+            {% endif %}
+          icon_template: &gt;
+            {% if is_state('sensor.plantwater_digital_0', '0') %}
+              mdi:flask-full
+            {% else %}
+              mdi:flask-empty
+            {% endif %}
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org7b8c29c"></a>Change the state_topic and command_topic<br />
+<div class="outline-text-6" id="text-1-3-5-2-1">
+<p>
+The command_topic is set to the the MQTT topic subscription value on your ESPurna.
+HomeAssistant posts to this topic to tell the ESP8266 to water or not to water the plants.
+</p>
+
+<p>
+The state_topic is your hostname /relay/0. It should have the state of the ESP8266
+relay every time it changes, or the state of the plant watering.
+</p>
+</div>
+</li>
+
+<li><a id="orgbb9f86c"></a>Change sensor.plantwater_digital_0<br />
+<div class="outline-text-6" id="text-1-3-5-2-2">
+<p>
+Save your changes and go to the Overview page.
+Click on the Plant Water device with a 0 or 1 next to it (or what ever you called it).
+Click the gear (settings) icon.
+Copy the Entity ID (something like sensor.hplantwater_digital_0).
+Back to the File Editor and paste it in place of sensor.platwater_digital_0 in both places.
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+
+<div id="outline-container-org97281e9" class="outline-4">
+<h4 id="org97281e9"><span class="section-number-4">1.3.6</span> Problems and Solutions</h4>
+<div class="outline-text-4" id="text-1-3-6">
+</div>
+<ol class="org-ol">
+<li><a id="orgf6a8ea5"></a>Don't See Plant Water Device in Home Assistant<br />
+<div class="outline-text-5" id="text-1-3-6-1">
+<p>
+Check whether it has made a post at homeassistant/# by using a MQTT client to subscript to that.
+If there is one, the problem is with HomeAssistant.
+</p>
+
+<p>
+If you can't subscribe, the problem is with the MQTT broker (try starting it in HomeAssistant if you used the addon).
+</p>
+
+<p>
+If there is nothing there, the problem is your ESP8266.
+You might have to setup MQTT on the ESP8266 with a host, username, password, and such so it can connect to the MQTT broker.
+</p>
+
+<p>
+Also make sure your firewall allows the port that your MQTT broker is using.
+</p>
+</div>
+</li>
+<li><a id="org3d9ca6f"></a>Random Crashing and restarting<br />
+<div class="outline-text-5" id="text-1-3-6-2">
+<p>
+Identified by looking at the serial output, basically it says it restarted or that it crashed.
+It may also say its in Fail Safe mode.
+Use the RST button once its connected to see all the serial output, and make sure the Arduino IDE serial monitor is set to 115200 baud rate.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org0101906"></a>Try erasing the flash<br />
+<div class="outline-text-6" id="text-1-3-6-2-1">
+<p>
+Use `esptool.py &#x2013;port /dev/ttyUSB0 erase_flash`.
+It seems that when developing and flashing, sometimes it leaves code in the flash that breaks stuff.
+</p>
+</div>
+</li>
+
+<li><a id="org09a0c91"></a>Disable features<br />
+<div class="outline-text-6" id="text-1-3-6-2-2">
+<p>
+Try commenting out the LED stuff in custom.h. I have found that can cause problems.
+Also try commenting out other entire features or disabling things and reflashing.
+</p>
+</div>
+</li>
+
+<li><a id="orgb16ec08"></a>Update ESPurna Git<br />
+<div class="outline-text-6" id="text-1-3-6-2-3">
+<p>
+You can navigate into espurna/code and do 'git pull upstream'.
+Then save the merge file it opens and try building with any new changes in development.
+</p>
+</div>
+</li>
+
+<li><a id="orge79cc66"></a>Create an issue on this Github repo<br />
+<div class="outline-text-6" id="text-1-3-6-2-4">
+<p>
+I'll see if I can help out or fix the problem.
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2021-04-20 Tue 14:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

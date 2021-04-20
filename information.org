@@ -1,31 +1,78 @@
 * Instructions
+** Requirements
+   Running Linux or you must use the Arduino-IDE to compile and flash the code.
+   This isn't covered here but it is on https://github.com/xoseperez/espurna/wiki/ArduinoIDE.
+   Have pio, esptool, gcc installed.
+   
 ** Hardware
-*** To Purchase
+*** Materials
+    See spreadsheet for Amazon links and prices.
+    Estimated cost to make one is between $70 and $150 at the time of making this guide, depending on what you have already.
+    https://docs.google.com/spreadsheets/d/1ye8_F2U_gymXYMMUUAUZvnKoF8kuvBFObCXN0axRH-A/edit?usp=sharing
+    
 **** Project Box
+     Something sorta water resistant (don't want to spill water on it and wreck it) to put your electronics and pump into.
+     You also have to be able to get the hoses out and power into the box.
+     I would just use a small cardboard box to start. Once everything is assembled you can
+     pick out a proper plastic box to order on Amazon depending on what you want it to
+     look like and the size you would like. I purchased two of these, one for the motor
+     and one for the electronics in case of leaks.
+     
 **** Control Board with WiFi
+     An ESP8266 device, I used the NodeMCU-12E board available on Amazon and elsewhere.
+     This board should be capable of running at 5V to switch a 5V relay. The NodeMCU-12E
+     is rated for 3.3V but can usually run at 5V without issue.
+     
 **** Relay
-**** Button
+     A 5V relay that can switch 8-12 volts DC.
+     You connect the motor power through this, and the ESP8266 can tell it to turn the motor on and off.
+     
+**** Button (optional)
+     Just a push button from an arduino kit.
+     
 **** Float Sensor
+     Something to tell you when the water level is low so your plant doesn't die.
+     
 **** Wire
+     Just some extra wire to conenct things with.
+     
 **** Parastolic Pump
      A small parastolic pump.
      5 Watts is what I purchased.
-     
+     It should run at a decent speed when powered by whatever power supply you selected.
+
 **** Silicone Tube
      Sized that it can be connected to the parastolic pump. If the pump says it works with 6mm OD, 4mm ID then buy that.
      More than a meter worth but depends on the reseviour and plants you intend to water.
-     
+
 **** Power Supply
-     >= 5 watts.
+     >= 5 watts, 8-12V.
      Nice to have a switch on it.
      The end cut off so its just two wires; mark the positive and negative with a volt meter if it isn't marked.
-     
+     I grabbed an old LED light power supply.
+     This should be the right voltage for the parastalic pump you selected with maybe an amp more than the motor requires.
+
+**** Prototype board (Optional)
+     Optional but makes a nicer final product than just connecting wires to each other.
+     The one I linked also comes with nice little screw terminals to allow disconnecting wires easily.
+
+**** Breadboard and jumpers
+     To make initial connections and debug issues without soldering and in a more organized manner than twisting wires.
+
 **** 5 Volt Regulator
      Can take the output of your power supply as input to create 5V.
 
-**** Buck Converter
-     Takes some random input voltage and turns it into a specified output voltage.
-     This is only required if your pump takes a different voltage than your power supply gives.
+     Very useful for other projects, variable output voltage (just set it to 5V with a volt meter).
+     You can also use these if you have a higher voltage power supply, just also regulate the motor voltage with another one.
+
+**** Heat Shrink Tubing / Electrical Tape
+     Or electrical tape to cover wire connections and prevent shorting.
+
+**** Soldering Iron (Optional)
+     Optional but recommended to connect wires together and use the prototype board.
+
+**** Volt Meter
+     To check polarity and voltages and such.
      
 *** Assembly
     If a pin is specified without telling you what its on, its on the ESP8266 WiFi board.
@@ -37,18 +84,27 @@
      
 **** ESP8266 WiFi Controller
      Connect the positive/red output from the 5V regulator to one of the 3V3 pins.
+     Note: We are connecting 5V to the 3.3V pins and Not the 5V input pin. The relay requires 5V so we have to
+     run the ESP8266 over voltage at 5V so the data pins can switch the relay. This may shorten the life of the
+     ESP8266 depending on which one you buy.
      Connect the negative/black output from the 5V regulator to one of the GND pins.
     
-**** Float Sensor Terminal Block
-     Connect one side to the GND pin and label it negative/black.
+**** Float Sensor
+     Connect one side to a GND pin and label it negative/black.
      The other side goes to D6 and label it positive/red.
 
 **** Button
-     Connect one side to the GND rail.
+     Connect one side to a GND pin.
      The other side goes to D5.
      
 **** Relay
+     For different relays this is different but the instructions for the relay I had follow.
+     Generally, you want the relay coil going to GND and D7, one side of the switch going to the power supply GND and the other side going to the motor GND.
+     Also I am using a normally closed relay. If you have a normally open relay you need to change RELAY1_TYPE from RELAY_TYPE_NORMAL to RELAY_TYPE_INVERSE.
+     See https://github.com/xoseperez/espurna/wiki/Buttons-and-switches.
+     
      We will label the relay pins as such:
+     #+BEGIN_SRC
      +------+
      |*    *|
      |      |
@@ -57,235 +113,299 @@
      |*    *|
      |*    *|
      +------+
+     #+END_SRC
      - top left as R1
      - top right as R2
      - middle left as R3
      - middle right as R4
      - bottom left as R5
-     - bottom right as R6
-     One of R3 or R4 goes to D7, the other goes to GND.
+     - bottom right as R6  
+
+     To figure out which side of the relay is normally open, use your multimeter to test for continuity between
+     R6 to R2, then R5 to R1. Which ever pair is not connected is the normally open pair. Use that pair for below.  
+       
+     - One of R3 or R4 goes to D7, the other goes to GND.
+     - Connect either R1 or R2 (the normally open one) to the power supply negative/black.
+     - Connect eitther R5 or R6 (the normally open one) to the motor's negative/black.
+
+**** Motor
+     Connect the positive/red to the power supply positive/red.
+     The negative/black should be connected to the relay.
 
      
 ** Software
-*** Problems and Solutions
-**** Flashing while watching serial debug
-     If having problems, use a USB serial adapter connected via the RX and TX pins on the ESP8266.
-     This allows reading of the serial port while flashing new firmwares without blocked file errors.
-
-**** Random Crashing and restarting
-     Use `esptool.py --port /dev/ttyUSB0 erase_flash`.
-     It seems that when developing and flashing, sometimes it leaves code in the flash that breaks stuff.
-     
-**** Decoding crash traces (incomplete)
-     Open the "code/espurna/espurna.ino" in Arduino-IDE.
-     Compile and install libraries using the cli because the IDE is too slow.
-     Download dependency zips from https://github.com/xoseperez/espurna/wiki/ArduinoIDE.
-     `arduino-cli config set library.enable_unsafe_install true`
-     `arduino-cli lib install --zip-path <path to the downloaded dependancy zip here>`
-     `arduino-cli compile -b esp8266:esp8266:nodemcuv2`
-     
-*** Building ESPurna
-   Clone ESPurna from eightys3v3n/espurna.
-   Switch to branch plant_water.
-   Checkout last working commit 2deb8d56ad4ad5cce1f024b7b91661da3881fdc7.
+*** Clone Repos
+   Clone/download this repo and its submodules to your computer.
+   Use `git clone --recurse-submodules https://github.com/eightys3v3n/plant_water.git`.
    
-**** Edit code/platformio_override.ini
-     4m is the megabytes of memory on the selected ESP8266 device.
-     eightys3v3n is the username you will use to login.
-     password is the password you will use to login.
-#+BEGIN_SRC
-[env:plant_water]
-extends = env:esp8266-4m-base
-src_build_flags = -DUSE_CUSTOM_H
-#+END_SRC
+   If you just download a zip of the repository, you must also go download a zip of the latest espurna repository
+   and put it in the espurna folder inside plant_water.
+   Download it from https://github.com/eightys3v3n/espurna/tree/plant_water.
+   The directory tree should look like this when you're ready.
+   #+BEGIN_SRC
+   plant_water/
+     espurna/
+       code/
+       firmware/
+       ...
+     information.org
+   #+END_SRC
+   
+*** Building ESPurna
+    Naviage to plant_water/espurna/code.
+    
+**** Edits
+     Only the credentials.h file is required to be edited. The other two are just things you can edit if need be.
+     The code included is an example of the file contents, see the actual files for up to date contents.
+     
+***** WiFi Credentials
+      `code/espurna/config/credentials.h`
+      
+      You have to make this file, but you don't have to have anything in it.
+      You can set this up once you flash the ESP8266 by connecting to its WiFi network, it just takes longer
+      than setting them in this file.
+      If you plan on using HomeAssistant you'll probably have to set up MQTT after you setup Home Assistant's built in broker.
+      You can comment out the MQTT stuff to just not set it until later.
+      #+BEGIN_SRC
+ #define WEB_USERNAME "Username for ESPurna web interface"
+ #define ADMIN_PASS "Password for ESPurna web interface"
 
-**** Edit code/espurna/config/custom.h
-     NODEMCU_LOLIN is the ESP8266 device we are using.
-     We need to convert the D0, D1 labels into their GPIO numbers, see https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/.
-     RELAY1_PIN 13 means we connect the relay switch to pin D7.
-     BUTTON2_PIN 14 means we connect the button to D5.
-     DIGITAL1_PIN 12 means we connect the float sensor to D6.
-     The other configuration options have details at https://github.com/xoseperez/espurna/wiki.
-#+BEGIN_SRC
-// Prevents checking of default options for this board.
-#define MANUFACTURER        "NODEMCU"
-#define DEVICE              "LOLIN"
+ #define WIFI1_SSID "SSID for 2.4Ghz WiFi"
+ #define WIFI1_PASS "Password for WiFi"
 
+ #define MQTT_AUTOCONNECT 1
+ #define MQTT_USER "MQTT server username"
+ #define MQTT_PASS "MQTT server password"
+ #define MQTT_PORT 1883
+ #define MQTT_SERVER "MQTT server IP address"
+ #define MQTT_QOS 2
+      #+END_SRC
 
-// Features
-#define ALEXA_SUPPORT          0
-#define API_SUPPORT            1
-#define BUTTON_SUPPORT         0
-#define DEBUG_SERIAL_SUPPORT   1
-#define DEBUG_TELNET_SUPPORT   0
-#define DEBUG_UDP_SUPPORT      0
-#define DEBUG_WEB_SUPPORT      1
-#define DOMOTICZ_SUPPORT       0
-#define ENCODER_SUPPORT        1
-#define HOMEASSISTANT_SUPPORT  1 // Not sure which of these works.
-#define HASS_SUPPORT           1 // Not sure which of these works.
-#define I2C_SUPPORT            0
-#define INFLUXDB_SUPPORT       0
-#define IR_SUPPORT             0
-#define LED_SUPPORT            1
-#define LLMNR_SUPPORT          0
-#define MDNS_SERVER_SUPPORT    0
-#define MQTT_SUPPORT           1
-#define NETBIOS_SUPPORT        0
-#define NOFUSS_SUPPORT         1
-#define NTP_SUPPORT            1
-#define OTA_ARDUINOOTA_SUPPORT 0
-#define RFM69_SUPPORT          0
-#define RFB_SUPPORT            0
-#define RPN_RULES_SUPPORT      0
-#define SCHEDULER_SUPPORT      1
-#define SPIFFS_SUPPORT         0
-#define SSDP_SUPPORT           0
-#define TELNET_SUPPORT         0
-#define TERMINAL_SUPPORT       1
-#define TERMINAL_MQTT_SUPPORT  0
-#define TERMINAL_WEB_API_SUPPORT 0
-#define THINGSPEAK_SUPPORT     0
-#define TUYA_SUPPORT           0
-#define UART_MQTT_SUPPORT      0
-#define WEB_SUPPORT            1
+***** ESP8266 Memory
+      `code/platformio_override.ini`
+      
+      -4m- is the megabytes of memory on the selected ESP8266 device. You may need to change this to 1m if you have a
+      board with less memory.
+      #+BEGIN_SRC
+ [env:plant_water]
+ extends = env:esp8266-4m-base
+ src_build_flags = -DUSE_CUSTOM_H
+      #+END_SRC
 
-
-// Sensors
-#define ADE7953_SUPPORT        0
-#define AM2320_SUPPORT         0
-#define ANALOG_SUPPORT         0
-#define BH1750_SUPPORT         0
-#define BMP180_SUPPORT         0
-#define BMX280_SUPPORT         0
-#define BME680_SUPPORT         0
-#define CSE7766_SUPPORT        0
-#define DALLAS_SUPPORT         0
-#define DHT_SUPPORT            0
-#define DIGITAL_SUPPORT        1
-#define ECH1560_SUPPORT        0
-#define EMON_ADC121_SUPPORT    0
-#define EMON_ADS1X15_SUPPORT   0
-#define EMON_ANALOG_SUPPORT    0
-#define EVENTS_SUPPORT         0
-#define EZOPH_SUPPORT          0
-#define GEIGER_SUPPORT         0
-#define GUVAS12SD_SUPPORT      0
-#define HLW8012_SUPPORT        0
-#define LDR_SUPPORT            0
-#define MAX6675_SUPPORT        0
-#define MHZ19_SUPPORT          0
-#define MICS2710_SUPPORT       0
-#define MICS5525_SUPPORT       0
-#define NTC_SUPPORT            0
-#define PMSX003_SUPPORT        0
-#define PULSEMETER_SUPPORT     0
-#define PZEM004T_SUPPORT       0
-#define SDS011_SUPPORT         0
-#define SENSEAIR_SUPPORT       0
-#define SHT3X_I2C_SUPPORT      0
-#define SI7021_SUPPORT         0
-#define SONAR_SUPPORT          0
-#define T6613_SUPPORT          0
-#define THERMOSTAT_SUPPORT     0
-#define TMP3X_SUPPORT          0
-#define V9261F_SUPPORT         0
-#define VEML6075_SUPPORT       0
-#define VL53L1X_SUPPORT        0
-#define HDC1080_SUPPORT        0
+***** Data Pins and Features
+      `code/espurna/config/custom.h`
+      
+      Converting pin numbers from D0, D1... to code compatible https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/.
+      LED1_PIN 2 means the LED is connected to GPIO2, which is correct for NodeMCU 1.0 devices but changes for other ESP8266 devices. If not sure comment this whole section out.
+      RELAY1_PIN 13 means we connect the relay switch to pin D7.
+      BUTTON2_PIN 14 means we connect the button to D5.
+      DIGITAL1_PIN 12 means we connect the float sensor to D6.
+      The button2 stuff lets you use your extra button to turn on and off the sensor. Information about how to customize it is on the wiki.
+      The other configuration options have details at https://github.com/xoseperez/espurna/wiki.
+      #+BEGIN_SRC
+ // Prevents checking of default options for this board.
+ #define MANUFACTURER        "NODEMCU"
+ #define DEVICE              "LOLIN"
 
 
-// Configuration
-#define LIGHT_SAVE_ENABLED 0
-#define BUTTON_MQTT_SEND_ALL_EVENTS 1
-#define MQTT_RETAIN 0
+ // Features
+ #define ALEXA_SUPPORT          0
+ #define API_SUPPORT            1
+ #define BUTTON_SUPPORT         0
+ #define DEBUG_SERIAL_SUPPORT   1
+ #define DEBUG_TELNET_SUPPORT   0
+ #define DEBUG_UDP_SUPPORT      0
+ #define DEBUG_WEB_SUPPORT      1
+ #define DOMOTICZ_SUPPORT       0
+ #define ENCODER_SUPPORT        1
+ #define HOMEASSISTANT_SUPPORT  1
+ #define I2C_SUPPORT            0
+ #define INFLUXDB_SUPPORT       0
+ #define IR_SUPPORT             0
+ #define LED_SUPPORT            1
+ #define LLMNR_SUPPORT          0
+ #define MDNS_SERVER_SUPPORT    0
+ #define MQTT_SUPPORT           1
+ #define NETBIOS_SUPPORT        0
+ #define NOFUSS_SUPPORT         1
+ #define NTP_SUPPORT            1
+ #define OTA_ARDUINOOTA_SUPPORT 0
+ #define RFM69_SUPPORT          0
+ #define RFB_SUPPORT            0
+ #define RPN_RULES_SUPPORT      0
+ #define SCHEDULER_SUPPORT      1
+ #define SPIFFS_SUPPORT         0
+ #define SSDP_SUPPORT           0
+ #define TELNET_SUPPORT         0
+ #define TERMINAL_SUPPORT       1
+ #define TERMINAL_MQTT_SUPPORT  0
+ #define TERMINAL_WEB_API_SUPPORT 0
+ #define THINGSPEAK_SUPPORT     0
+ #define TUYA_SUPPORT           0
+ #define UART_MQTT_SUPPORT      0
+ #define WEB_SUPPORT            1
 
-// Make the built in LED flash on WiFi activity
-#define LED1_PIN 2
-#define LED1_PIN_INVERSE 1
-#define LED1_MODE LED_MODE_WIFI
 
-// For the motor relay
-#define RELAY1_PIN 13
-#define RELAY1_TYPE RELAY_TYPE_NORMAL
-#define RELAY1_PULSE_MODE RELAY_PULSE_OFF // defaults to being off (not watering)
-#define RELAY1_PULSE_TIME 20 // number of seconds the relay can stay on for
+ // Sensors
+ #define ADE7953_SUPPORT        0
+ #define AM2320_SUPPORT         0
+ #define ANALOG_SUPPORT         0
+ #define BH1750_SUPPORT         0
+ #define BMP180_SUPPORT         0
+ #define BMX280_SUPPORT         0
+ #define BME680_SUPPORT         0
+ #define CSE7766_SUPPORT        0
+ #define DALLAS_SUPPORT         0
+ #define DHT_SUPPORT            0
+ #define DIGITAL_SUPPORT        1
+ #define ECH1560_SUPPORT        0
+ #define EMON_ADC121_SUPPORT    0
+ #define EMON_ADS1X15_SUPPORT   0
+ #define EMON_ANALOG_SUPPORT    0
+ #define EVENTS_SUPPORT         0
+ #define EZOPH_SUPPORT          0
+ #define GEIGER_SUPPORT         0
+ #define GUVAS12SD_SUPPORT      0
+ #define HLW8012_SUPPORT        0
+ #define LDR_SUPPORT            0
+ #define MAX6675_SUPPORT        0
+ #define MHZ19_SUPPORT          0
+ #define MICS2710_SUPPORT       0
+ #define MICS5525_SUPPORT       0
+ #define NTC_SUPPORT            0
+ #define PMSX003_SUPPORT        0
+ #define PULSEMETER_SUPPORT     0
+ #define PZEM004T_SUPPORT       0
+ #define SDS011_SUPPORT         0
+ #define SENSEAIR_SUPPORT       0
+ #define SHT3X_I2C_SUPPORT      0
+ #define SI7021_SUPPORT         0
+ #define SONAR_SUPPORT          0
+ #define T6613_SUPPORT          0
+ #define THERMOSTAT_SUPPORT     0
+ #define TMP3X_SUPPORT          0
+ #define V9261F_SUPPORT         0
+ #define VEML6075_SUPPORT       0
+ #define VL53L1X_SUPPORT        0
+ #define HDC1080_SUPPORT        0
 
-// Built-in flash button
-#define BUTTON1_PIN 0
-#define BUTTON1_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH
-#define BUTTON1_LNGCLICK BUTTON_ACTION_NONE
 
-// Extra external button
-#define BUTTON2_PIN 14
-#define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
-#define BUTTON2_PRESS BUTTON_ACTION_PULSE
-#define BUTTON2_CLICK BUTTON_ACTION_NONE
-#define BUTTON2_RELEASE BUTTON_ACTION_OFF
-#define BUTTON2_DBLCLICK BUTTON_ACTION_TOGGLE
-#define BUTTON2_RELAY 1
+ // Configuration
+ #define LIGHT_SAVE_ENABLED 0
+ #define BUTTON_MQTT_SEND_ALL_EVENTS 1
+ #define MQTT_RETAIN 0
+ #define MQTT_ENABLED 1
+ #define HOMEASSISTANT_ENABLED 1
 
-// Float sensor
-#define DIGITAL1_PIN 12
+ // Make the built in LED flash on WiFi activity
+ #define LED1_PIN 2
+ #define LED1_PIN_INVERSE 1
+ #define LED1_MODE LED_MODE_WIFI
+
+ // For the motor relay
+ #define RELAY1_PIN 13
+ #define RELAY1_TYPE RELAY_TYPE_NORMAL
+ #define RELAY1_PULSE_MODE RELAY_PULSE_OFF // defaults to being off (not watering)
+ #define RELAY1_PULSE_TIME 20 // number of seconds the relay can stay on for
+
+ // Built-in flash button
+ #define BUTTON1_PIN 0
+ #define BUTTON1_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH
+ #define BUTTON1_LNGCLICK BUTTON_ACTION_NONE
+
+ // Extra external button
+ #define BUTTON2_PIN 14
+ #define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
+ #define BUTTON2_PRESS BUTTON_ACTION_PULSE
+ #define BUTTON2_CLICK BUTTON_ACTION_NONE
+ #define BUTTON2_RELEASE BUTTON_ACTION_OFF
+ #define BUTTON2_DBLCLICK BUTTON_ACTION_TOGGLE
+ #define BUTTON2_RELAY 1
+
+ // Float sensor
+ #define DIGITAL1_PIN 12
 
 
-// Secret Configuration
-#include "credentials.h"
-#+END_SRC
-
+ // Secret Configuration
+ #include "credentials.h"
+      #+END_SRC
+     
 **** Compile firmware
      Plug in the ESP8266 board via USB.
-     Run `pio run -e plant_water`
-     Run `esptool.py --baud 256000 --after hard_reset --chip esp8266 write_flash 0 .pio/build/plant_water/firmware.bin`
-     Or to do both those at once but slower, `pio run -t upload -e plant_water`.
-     This both compiles the program and flashes it to the ESP8266.
 
      Some times you may need to reflash the entire ESP8266 memory to avoid issues,
      Use `esptool.py erase_flash` to do that before running the above commands if you encounter random crashes.
      
+     From espurna/code run `./build.sh` to compile the project and flash it to a connected deivce.
+     
+*** Configure ESPurna
+    You also have to decide now if you want to run HomeAssistant to manage the watering device (more features and stuff)
+    or just use the device its self (easier).
+    Now that ESPurna is flashed, we have a few options we can change on the following tabs.
+    Make sure to hit save on every page.
 
-* Unknown
-** ESP8266 Node Pins:
-  - D4/GPIO2 :: built-in LED
-  - D5/GPIO14 :: extra button
-  - D6/GPIO12 :: float sensor
-  - D7/GPIO13 :: relay
+**** General
+     Set the host name to something that makes sense like "PlantWater".
 
-** ESPurna Building
-  env ESPURNA_FLAGS='-DNODEMCU_LOLIN' PLATFORMIO_SRC_BUILD_FLAGS='
+**** HASS
+     - Enable discovery.
+     - Leave the prefix as homeassistant if you don't know what this does. Its default.
+     - Retain to yes. This means Home Assistant sees if the device has ever existed and adds it rather than waiting for it to say "Hello".
 
-  -DNODEMCU_LOLIN
-  -DTELNET_SUPPORT=0
-  -DMQTT_SUPPORT=1
-  -DWEB_SUPPORT=1
-  -DWEB_SSL_ENABLED=1
-  #define DIGITAL_SUPPORT 1
-  #define TERMINAL_MQTT_SUPPORT 1
-  #define TERMINAL_WEB_API_SUPPORT 1
+**** MQTT
+     Enable if it isn't already.
+     Also enter your HomeAssistant broker details here if you aren't using your own broker.
+     This needs to be done after HomeAssistant is setup.
+     
+**** NPT
+     Set your timezone by finding it in the list at https://github.com/esp8266/Arduino/blob/master/cores/esp8266/TZ.h.
+     Then copy the bit between the quotes and paste it into the Time Zone field.
 
-  #define BUTTON_MQTT_SEND_ALL_EVENTS
-  #define BUTTON_MQTT_RETAIN
+**** Schedule
+     If you don't want to use HomeAssistant to control plant watering, just add a watering schedule here.
+     With Pulse Mode on you should only have to set a turn on schedule, the switch will turn off after the pulse time.
 
-  -DWEB_USERNAME=eightys3v3n
-  -DADMIN_PASS=w99WhvS8sWqXVT
+**** Sensors
+     - Read interval is how often to check whether the water is empty or not. Set it accordingly to something like 1 minute.
+     - Change "Report every" to 1.
 
-  // LED preconfigured
+**** Switches
+     Setting first, the value after the colons.
+     
+     - Boot mode :: Always Off
+     - Pulse mode :: Normally Off
+     - Pulse time :: The maximum time we should be able to water the plant. It auto-stops watering after this many seconds if you don't turn it off.
+     - MQTT topic subscription :: Set this to something like "PlantWater/water" if using HomeAssistant. Home Assistant uses this to tell it to water the plants.
+     - On MQTT disconnect :: Turn off
 
-  // BUTTON1 already configured to flash button
+**** WiFi
+     Here you can add more WiFi networks and change the WiFi password.
+     If you only have one WiFi network, turn off Scan. This results in better performance when the WiFi signal is low.
 
-  #define RELAY1_PIN 13
-  
-  #define BUTTON2_PIN 13
-  #define BUTTON2_CONFIG BUTTON_PUSHBUTTON | BUTTON_DEFAULT_LOW
-  #define BUTTON2_RELAY 1
+**** Debug
+     This just lists what the device is doing. You can also use it to turn things on and off, see for details https://github.com/xoseperez/espurna/wiki/Terminal.
+     
+*** Install HomeAssistant
+    Go through the Getting Started guide at https://www.home-assistant.io/getting-started/.
+    
+    Once you have HomeAssistant up and running, if you have a dedicated MQTT server: https://www.home-assistant.io/docs/mqtt/broker/.
 
-  #define DIGITAL1_PIN 14
+    If you don't have a dedicated MQTT server: https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md
 
+    Install the File Editor Addon: https://www.home-assistant.io/getting-started/configuration/
 
-  ' pio run -e esp8266-4m-base
-** Manual Home Assistant Configurations
-*** For switch
-    #+BEGIN_SRC
+*** Configure HomeAssistant
+    Configure the broker URL information to use your dedicated server or the MQTT Server Addon.
+    You should see your Plant Water device in Configuration > Devices.
+
+**** Configure Water Button
+     Use the File Editor addon to edit the configuration.yaml file.
+     Add the following in and make changes. The PlantWater should be changed to the Hostname of your device.
+     After making changes, go to Configuration > Server Controls > Restart.
+     If there are any errors they will show up in Configuration > Logs.
+     On the Overview page you should now have a switch that when toggled, waters the plant, then toggles its self off again (thanksto pulse mode on ESPurna).
+     
+     #+BEGIN_SRC
 switch:
   - platform: mqtt
     unique_id: watering_plant
@@ -297,10 +417,13 @@ switch:
     optimistic: false
     qos: 2
     retain: false
-    #+END_SRC
+     #+END_SRC
 
-*** For Empty Sensor
-    #+BEGIN_SRC
+**** Make the water level sensor nicer
+     A water level of 0 or 1 is fine and all, but "Not Empty" and "Empty" is nicer. This does that.
+     Do the same as configuring the water button but with the below stuff now a new sensor will show up on Overview.
+     
+     #+BEGIN_SRC
 sensor:
   - platform: template
     sensors:
@@ -314,9 +437,56 @@ sensor:
               Empty
             {% endif %}
           icon_template: >
-            {% if is_state('binary_sensor.washing_machine', 'on') %}
-              mdi:flask-empty-outline
+            {% if is_state('sensor.plantwater_digital_0', '0') %}
+              mdi:flask-full
             {% else %}
               mdi:flask-empty
             {% endif %}
-    #+END_SRC
+     #+END_SRC
+     
+***** Change the state_topic and command_topic
+      The command_topic is set to the the MQTT topic subscription value on your ESPurna.
+      HomeAssistant posts to this topic to tell the ESP8266 to water or not to water the plants.
+      
+      The state_topic is your hostname /relay/0. It should have the state of the ESP8266
+      relay every time it changes, or the state of the plant watering.
+       
+***** Change sensor.plantwater_digital_0
+      Save your changes and go to the Overview page.
+      Click on the Plant Water device with a 0 or 1 next to it (or what ever you called it).
+      Click the gear (settings) icon.
+      Copy the Entity ID (something like sensor.hplantwater_digital_0).
+      Back to the File Editor and paste it in place of sensor.platwater_digital_0 in both places.
+
+
+*** Problems and Solutions
+**** Don't See Plant Water Device in Home Assistant
+     Check whether it has made a post at homeassistant/# by using a MQTT client to subscript to that.
+     If there is one, the problem is with HomeAssistant.
+     
+     If you can't subscribe, the problem is with the MQTT broker (try starting it in HomeAssistant if you used the addon).
+
+     If there is nothing there, the problem is your ESP8266.
+     You might have to setup MQTT on the ESP8266 with a host, username, password, and such so it can connect to the MQTT broker.
+
+     Also make sure your firewall allows the port that your MQTT broker is using.
+**** Random Crashing and restarting
+     Identified by looking at the serial output, basically it says it restarted or that it crashed.
+     It may also say its in Fail Safe mode.
+     Use the RST button once its connected to see all the serial output, and make sure the Arduino IDE serial monitor is set to 115200 baud rate.
+
+***** Try erasing the flash
+      Use `esptool.py --port /dev/ttyUSB0 erase_flash`.
+      It seems that when developing and flashing, sometimes it leaves code in the flash that breaks stuff.
+
+***** Disable features
+      Try commenting out the LED stuff in custom.h. I have found that can cause problems.
+      Also try commenting out other entire features or disabling things and reflashing.
+
+***** Update ESPurna Git
+      You can navigate into espurna/code and do 'git pull upstream'.
+      Then save the merge file it opens and try building with any new changes in development.
+
+***** Create an issue on this Github repo
+      I'll see if I can help out or fix the problem.
+
