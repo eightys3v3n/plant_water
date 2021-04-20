@@ -1,4 +1,4 @@
 [submodule "espurna"]
-	url = git@github.com:eightys3v3n/espurna.git
+	url = https://github.com/eightys3v3n/espurna.git
 	branch = plant_water
 	path = espurna
