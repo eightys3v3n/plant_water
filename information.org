@@ -1,4 +1,7 @@
 * Instructions
+  This project results in a plant watering robot connected to the internet of things.
+  It costs as low as $40 if you scavenge components or as much as $150 if you purchase everything new from Amazon.
+  
 ** Requirements
    Running Linux or you must use the Arduino-IDE to compile and flash the code.
    This isn't covered here but it is on https://github.com/xoseperez/espurna/wiki/ArduinoIDE.
