@@ -516,3 +516,27 @@ sensor:
 ***** Create an issue on this Github repo
       I'll see if I can help out or fix the problem.
 
+* Conclusion
+** Summary
+   The cost that I built this project for is likely not worth most people's time especially given that the lowest cost per unit I could get was more than $60. This price isn't justified given that it only saves a couple minutes a week but it still costs insignificant time and money to build.
+
+** In Future
+   The per-plant-cost of this device could be decreased in a number of ways. If the cost could be brought down to $30 per plant it would likely be a reasonable solution to indoor watering. It would also decrease the time investment and the space taken up by the unit on a window sill.
+
+*** Bulk Orders
+    Almost all of the components used to build this device can be purchased for significantly less in bulk. Building 10 or more units would drop the price further, likely to around $40 per plant.
+   
+*** Longer Lead Time Parts
+    Ordering parts from AliExpress could have resulted in a price decrease in exchange for a multi-month shipping time for parts.
+
+*** Water More than One Plant
+    - Potentially using a small solenoid with multiple outlets would allow for watering more plants with the same flow rate. This would also allow for watering more plants with varying water requirements.
+    - Using small fittings with the silicone tubing with some kind of flow restrictors could also be used to water more than one plant with a single device. This is most likely what I will look into in the future.
+
+*** Different Parts
+    The following parts could have been swapped out for cheaper or more effective variants.
+
+    - Tubing :: Silicone tubing is likely the most expensive option here. Using clear vinyl tubing is another options.
+    - Pump :: A peristaltic pump allows for different liquids to be pumped, but is not strictly necessary as fish tank pumps would likely work as well.
+    - Prototype board :: The project could have been made strictly by soldering wires to each other but I wanted to use project board to make it nicer to pack into the project box.
+    - Power delivery :: Requiring a 5V regulator adds additional cost. If a microcontroller could be selected that allowed for 12V power and had data pins capable of driving the relay this cost could be eliminated. Also, overvolting the microcontroller is likely to decrease its lifespan.
