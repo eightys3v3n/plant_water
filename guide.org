@@ -178,7 +178,7 @@
    #+END_SRC
    
 *** Building ESPurna
-    Naviage to plant_water/espurna/code.
+    Naviage to plant_water/.
     
 **** Edits
      Only the credentials.h file is required to be edited. The other two are just things you can edit if need be.
@@ -210,7 +210,7 @@
 ***** ESP8266 Memory
       `code/platformio_override.ini`
       
-      -4m- is the megabytes of memory on the selected ESP8266 device. You may need to change this to 1m if you have a
+      `-4m-` is the megabytes of memory on the selected ESP8266 device. You may need to change this to 1m if you have a
       board with less memory.
       #+BEGIN_SRC
  [env:plant_water]
@@ -332,7 +332,7 @@
  #define RELAY1_PIN 13
  #define RELAY1_TYPE RELAY_TYPE_NORMAL
  #define RELAY1_PULSE_MODE RELAY_PULSE_OFF // defaults to being off (not watering)
- #define RELAY1_PULSE_TIME 20 // number of seconds the relay can stay on for
+ #define RELAY1_PULSE_TIME 30 // number of seconds the relay can stay on for
 
  // Built-in flash button
  #define BUTTON1_PIN 0
@@ -362,7 +362,7 @@
      Some times you may need to reflash the entire ESP8266 memory to avoid issues,
      Use `esptool.py erase_flash` to do that before running the above commands if you encounter random crashes.
      
-     From espurna/code run `./build.sh` to compile the project and flash it to a connected deivce.
+     From plant_water/ run `./build.sh` to compile the project and flash it to a connected deivce.
      
 *** Configure ESPurna
     You also have to decide now if you want to run HomeAssistant to manage the watering device (more features and stuff)
@@ -379,7 +379,7 @@
      - Retain to yes. This means Home Assistant sees if the device has ever existed and adds it rather than waiting for it to say "Hello".
 
 **** MQTT
-     Enable if it isn't already.
+     Enable if it isn't already. Some times you have to disable, save, then enable, save the first flash.
      Also enter your HomeAssistant broker details here if you aren't using your own broker.
      This needs to be done after HomeAssistant is setup.
      
@@ -401,7 +401,6 @@
      - Boot mode :: Always Off
      - Pulse mode :: Normally Off
      - Pulse time :: The maximum time we should be able to water the plant. It auto-stops watering after this many seconds if you don't turn it off.
-     - MQTT topic subscription :: Set this to something like "PlantWater/water" if using HomeAssistant. Home Assistant uses this to tell it to water the plants.
      - On MQTT disconnect :: Turn off
 
 **** WiFi
@@ -437,7 +436,7 @@ switch:
     unique_id: watering_plant
     name: Watering Plant
     state_topic: "PlantWater/relay/0"
-    command_topic: "PlantWater/water"
+    command_topic: "PlantWater/relay/0/set"
     payload_on: 1
     payload_off: 0
     optimistic: false
@@ -455,15 +454,15 @@ sensor:
     sensors:
         plant_water_level:
           friendly_name: Plant Water Level
-          unique_id: sensor.plant_water_level
+          unique_id: sensor.plantwater_level_nice
           value_template: >
-            {% if is_state('sensor.plantwater_digital_0', '0') %}
+            {% if is_state('sensor.plantwater_level', '0') %}
               Not Empty
             {% else %}
               Empty
             {% endif %}
           icon_template: >
-            {% if is_state('sensor.plantwater_digital_0', '0') %}
+            {% if is_state('sensor.plantwater_level', '0') %}
               mdi:flask-full
             {% else %}
               mdi:flask-empty
@@ -477,12 +476,11 @@ sensor:
       The state_topic is your hostname /relay/0. It should have the state of the ESP8266
       relay every time it changes, or the state of the plant watering.
        
-***** Change sensor.plantwater_digital_0
+***** Change sensor.plantwater_level
       Save your changes and go to the Overview page.
       Click on the Plant Water device with a 0 or 1 next to it (or what ever you called it).
       Click the gear (settings) icon.
-      Copy the Entity ID (something like sensor.hplantwater_digital_0).
-      Back to the File Editor and paste it in place of sensor.platwater_digital_0 in both places.
+      Change the Entity ID to sensor.plantwater_level.
 
 
 *** Problems and Solutions
