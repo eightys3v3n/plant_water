@@ -159,6 +159,14 @@
       fall out. The peristaltic pump makes the tubing vibrate a reasonable amount. If the tube falls out
       the pump is more than happy to pump air, but your plant doesn't drink air.
 
+***** Watter Hammer Arrestor
+      When you turn on the pump you might notice that the tubing shakes a lot. If you want to prevent this, make a loop filled with air using two T connectors in between the pump and plant. The air will compress and absorb the vibration.
+      |
+      |---+
+      |   |  <- this side filled with air
+      |---+
+      | <- this one filled with water
+
 ** Software
 *** Clone Repos
    Clone/download this repo and its submodules to your computer.
